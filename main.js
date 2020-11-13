@@ -4,12 +4,13 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 1200,
     height: 900,
+    icon: 'images/logo_voice_2020q4_color_1x_web_32dp.png',
     webPreferences: {
       nodeIntegration: true
     }
   })
   win.removeMenu();
-  win.loadURL('https://voice.google.com', {userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'})
+  win.loadURL('https://voice.google.com', {userAgent: 'Chrome'})
 }
 
 app.whenReady().then(createWindow)
