@@ -2,7 +2,7 @@
   "name": "voice-desktop-app",
   "version": "1.0.0",
   "description": "An electron shell wrapper for the google voice app",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "start": "electron ."
   },
