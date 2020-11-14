@@ -12,3 +12,5 @@ Theres no package so you have to run from source.
 `git clone git@github.com:Jerrkawz/google-voice-desktop-app.git`
 `npm install`
 `npm start`
+
+![Windows](/images/windows.png?raw=true")
