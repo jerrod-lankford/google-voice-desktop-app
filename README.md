@@ -8,8 +8,11 @@ It just lets you keep voice open without a chrome browser. It will also check th
 Currently supports both OSX and Windows 10
 
 ## Install
-Theres no package so you have to run from source.
+Go to the releases page https://github.com/Jerrkawz/google-voice-desktop-app/releases and download either the windows or mac release.
 
+Simply uzip and drag into the applications folder (mac) or run the executable (windows
+
+## Run From Source
 `git clone git@github.com:Jerrkawz/google-voice-desktop-app.git`
 
 `npm install`
