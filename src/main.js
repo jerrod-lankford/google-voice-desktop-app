@@ -18,7 +18,7 @@ function createWindow() {
     })
     win.removeMenu();
     win.loadURL('https://voice.google.com', { userAgent: 'Chrome' });
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
 
     if (currentInterval) {
         clearInterval(currentInterval);
