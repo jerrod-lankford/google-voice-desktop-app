@@ -30,7 +30,9 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "icon": "images/1024px-Google_Voice_icon_(2020).ico"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",

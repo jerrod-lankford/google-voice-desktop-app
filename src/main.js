@@ -1,8 +1,9 @@
 const { app, nativeImage, BrowserWindow } = require('electron')
 const BadgeGenerator = require('./badge_generator')
-const icon = 'images/1024px-Google_Voice_icon_(2020).png';
 const REFRESH_RATE = 5000; // 5 seconds
-
+const icon = nativeImage.createFromPath(
+    app.getAppPath() + "/public/1024px-Google_Voice_icon_(2020).png"
+);
 let currentInterval;
 let lastNotification = 0;
 let badgeGenerator;
@@ -11,7 +12,6 @@ function createWindow() {
     const win = new BrowserWindow({
         width: 1200,
         height: 900,
-        icon,
         webPreferences: {
             nodeIntegration: true
         }
@@ -29,6 +29,7 @@ function createWindow() {
 
     return win;
 }
+
 
 app.dock && app.dock.setIcon(icon);
 app.whenReady().then(createWindow)
