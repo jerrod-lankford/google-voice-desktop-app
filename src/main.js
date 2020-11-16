@@ -17,7 +17,7 @@ function createWindow() {
         }
     })
     win.removeMenu();
-    win.loadURL('https://voice.google.com', { userAgent: 'Chrome' });
+    win.loadURL('https://voice.google.com', { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.193 Safari/537.36' });
     // win.webContents.openDevTools();
 
     if (currentInterval) {
@@ -74,12 +74,14 @@ function updateNotifications(app, window) {
 
 // Keep our doc in sync with whats in the dom
 function sendCountsToDock(app, win, num) {
-    if (process.platform === 'darwin') {
-        sendCountsToDockMac(app, num);
-    } else {
-        sendCountsToDockWindows(win, num)
+    if (num !== lastNotification) {
+        lastNotification = num;
+        if (process.platform === 'darwin') {
+            sendCountsToDockMac(app, num);
+        } else {
+            sendCountsToDockWindows(win, num)
+        }
     }
-
 }
 
 function sendCountsToDockWindows(win, num) {
@@ -96,10 +98,9 @@ function sendCountsToDockWindows(win, num) {
 
 function sendCountsToDockMac(app, num) {
     if (app.dock) {
-        if (num > 0 && num !== lastNotification) {
+        app.dock.setBadge(`${num || ''}`);
+        if (num > 0) {
             app.dock.bounce();
         }
-        app.dock.setBadge(`${num || ''}`);
     }
-    lastNotification = num;
 }
