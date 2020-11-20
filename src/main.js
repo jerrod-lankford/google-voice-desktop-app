@@ -1,12 +1,14 @@
-const { app, nativeImage, BrowserWindow } = require('electron')
+const { app, nativeImage, BrowserWindow, Tray, Menu } = require('electron')
 const BadgeGenerator = require('./badge_generator')
 const REFRESH_RATE = 5000; // 5 seconds
+const iconPNG = "1024px-Google_Voice_icon_(2020).png";
 const icon = nativeImage.createFromPath(
-    app.getAppPath() + "/public/1024px-Google_Voice_icon_(2020).png"
+    app.getAppPath() + "/public/" + iconPNG
 );
 let currentInterval;
 let lastNotification = 0;
 let badgeGenerator;
+let tray = null;
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -26,6 +28,18 @@ function createWindow() {
     badgeGenerator = new BadgeGenerator(win)
 
     currentInterval = setInterval(updateNotifications.bind(this, app, win), REFRESH_RATE);
+
+    // Add support for tray icon
+    win.on('minimize', function (event) {
+        event.preventDefault();
+        win.hide();
+        tray = createTray(win, app.getAppPath() + "/images/" + iconPNG, 'Google Voice Tray');
+    });
+
+    win.on('restore', function (event) {
+        win.show();
+        tray.destroy();
+    });
 
     return win;
 }
@@ -103,4 +117,31 @@ function sendCountsToDockMac(app, num) {
             app.dock.bounce();
         }
     }
+}
+
+// Create the tray icon and menu options
+function createTray(mainWin, iconPath, tipText) {
+    let appIcon = new Tray(iconPath);
+
+	appIcon.setToolTip(tipText);
+
+    appIcon.on('double-click', function (event) {
+        mainWin.show();
+    });
+
+    appIcon.setContextMenu(Menu.buildFromTemplate([
+        {
+            label: 'Show', click: function () {
+                mainWin.show();
+            }
+        },
+        {
+            label: 'Exit', click: function () {
+                app.isQuiting = true;
+                app.quit();
+            }
+        }
+    ]));
+
+    return appIcon;
 }
