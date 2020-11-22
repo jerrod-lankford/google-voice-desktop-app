@@ -14,7 +14,7 @@
   },
   "linux": {
    "target": [
-    "VoiceDesktopImage"
+    "AppImage"
    ],
    "category": "Office"
   }
