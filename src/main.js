@@ -109,11 +109,10 @@ function sendCountsToDock(app, num) {
             sendCountsToDockWindows(num)
         }
 
-        tray.destroy();
         if (num > 0) {
-            tray = createTray(iconTrayDirty, 'Google Voice Tray - Unread');
+            tray && tray.setImage(iconTrayDirty);
         } else {
-            tray = createTray(iconTray, 'Google Voice Tray');
+            tray && tray.setImage(iconTray);
         }
     }
 }
