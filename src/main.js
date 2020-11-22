@@ -1,11 +1,13 @@
 const { app, nativeImage, BrowserWindow, Tray, Menu } = require('electron')
 const BadgeGenerator = require('./badge_generator')
+
 const REFRESH_RATE = 5000; // 5 seconds
-const iconTray = "tray-Google_Voice_icon_(2020).png";
-const iconPNG = "1024px-Google_Voice_icon_(2020).png";
+const iconTray = `${app.getAppPath()}/images/tray-Google_Voice_icon_(2020).png`;
+const iconTrayDirty = `${app.getAppPath()}/images/tray-dirty-Google_Voice_icon_(2020).png`;
 const icon = nativeImage.createFromPath(
-    app.getAppPath() + "/public/" + iconPNG
+    `${app.getAppPath()}/public/1024px-Google_Voice_icon_(2020).png`
 );
+
 let currentInterval;
 let lastNotification = 0;
 let badgeGenerator;
@@ -28,12 +30,11 @@ function createWindow() {
     }
     badgeGenerator = new BadgeGenerator(win)
 
+    // Add support for tray icon - only create one tray icon (shows ALL the time) and do not destroy each time
+    tray = createTray(win, iconTray, 'Google Voice Tray');
+
     currentInterval = setInterval(updateNotifications.bind(this, app, win), REFRESH_RATE);
 
-    // Add support for tray icon - only create one tray icon (shows ALL the time) and do not destroy each time
-	tray = createTray(win, app.getAppPath() + "/images/" + iconTray, 'Google Voice Tray');
-
-    //win.on('minimize', function (event) {
 	win.on('close', function (event) {
         if (!app.isQuiting) {
             event.preventDefault();
@@ -43,7 +44,6 @@ function createWindow() {
 
     win.on('restore', function (event) {
         win.show();
-        //tray.destroy();
     });
 
     return win;
@@ -52,14 +52,6 @@ function createWindow() {
 
 app.dock && app.dock.setIcon(icon);
 app.whenReady().then(createWindow)
-
-// Only allow the app to CLOSE from the systray icon
-//app.on('window-all-closed', () => {
-//    // I dont really like this behavior but if we let it kill the window then its just an empty worthless shell
-//    // if (process.platform !== 'darwin') {
-//    app.quit()
-//    // }
-//})
 
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -100,6 +92,13 @@ function sendCountsToDock(app, win, num) {
             sendCountsToDockMac(app, num);
         } else {
             sendCountsToDockWindows(win, num)
+        }
+
+        tray.destroy();
+        if (num > 0) {
+            tray = createTray(win, iconTrayDirty, 'Google Voice Tray - Unread');
+        } else {
+            tray = createTray(win, iconTray, 'Google Voice Tray');
         }
     }
 }
