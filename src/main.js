@@ -5,7 +5,7 @@ const path = require('path');
 const { ipcMain } = require('electron')
 
 // Constants
-const REFRESH_RATE = 5000; // 5 seconds
+const REFRESH_RATE = 1000; // 5 seconds
 const iconTray = `${app.getAppPath()}/images/tray-Google_Voice_icon_(2020).png`;
 const iconTrayDirty = `${app.getAppPath()}/images/tray-dirty-Google_Voice_icon_(2020).png`;
 const icon = nativeImage.createFromPath(
@@ -144,7 +144,7 @@ function createTray(iconPath, tipText) {
 
 	appIcon.setToolTip(tipText);
 
-    appIcon.on('double-click', function (event) {
+    appIcon.on('click', function (event) {
         win && win.show();
     });
 
