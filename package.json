@@ -10,7 +10,7 @@
    "category": "public.app-category.social-networking"
   },
   "dmg": {
-   "icon": true
+   "icon": false
   },
   "linux": {
    "target": [
