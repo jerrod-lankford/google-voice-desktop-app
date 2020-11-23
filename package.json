@@ -22,7 +22,6 @@
  "scripts": {
   "start": "electron .",
   "postinstall": "electron-builder install-app-deps",
-  "build": "electron-builder --mac --windows --linux",
   "build:windows": "electron-builder --windows",
   "build:mac": "electron-builder --mac",
   "build:linux": "electron-builder --linux",
