@@ -5,12 +5,13 @@ const path = require('path');
 const { ipcMain } = require('electron')
 
 // Constants
+const appPath = app.getAppPath();
 const REFRESH_RATE = 1000; // 1 seconds
-const icon = `${process.resourcesPath}/images/64px-Google_Voice_icon_(2020).png`;
-const iconTray = `${process.resourcesPath}/images/tray-Google_Voice_icon_(2020).png`;
-const iconTrayDirty = `${process.resourcesPath}/images/tray-dirty-Google_Voice_icon_(2020).png`;
+const icon = `${appPath}/images/64px-Google_Voice_icon_(2020).png`;
+const iconTray = `${appPath}/images/tray-Google_Voice_icon_(2020).png`;
+const iconTrayDirty = `${appPath}/images/tray-dirty-Google_Voice_icon_(2020).png`;
 const dockIcon = nativeImage.createFromPath(
-    `${process.resourcesPath}/images/1024px-Google_Voice_icon_(2020).png`
+    `${appPath}/images/1024px-Google_Voice_icon_(2020).png`
 );
 
 // Globals
