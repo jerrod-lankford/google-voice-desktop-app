@@ -1,60 +1,44 @@
 {
-  "name": "voice-desktop-app",
-  "version": "1.0.4.1",
-  "description": "An electron shell wrapper for the google voice app",
-  "main": "src/main.js",
-  "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+ "name": "voice-desktop-app",
+ "version": "1.0.4.1",
+ "description": "An electron shell wrapper for the google voice app",
+ "main": "src/main.js",
+ "build": {
+  "appId": "com.jerrkawz.voiceDesktop",
+  "productName": "Voice Desktop",
+  "mac": {
+   "category": "public.app-category.social-networking"
   },
-  "keywords": [
-    "electron",
-    "voice",
-    "wrapper",
-    "desktop",
-    "google"
-  ],
-  "author": "jllankfo@ncsu.edu",
-  "license": "ISC",
-  "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.54",
-    "@electron-forge/maker-deb": "^6.0.0-beta.54",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
-    "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "electron": "^10.1.5"
+  "dmg": {
+   "icon": true
   },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
-  },
-  "config": {
-    "forge": {
-      "packagerConfig": {
-        "icon": "images/1024px-Google_Voice_icon_(2020).icns"
-      },
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "voice_desktop_app"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        }
-      ]
-    }
+  "linux": {
+   "target": [
+    "AppImage"
+   ],
+   "category": "Office"
   }
+ },
+ "scripts": {
+  "start": "electron .",
+  "postinstall": "electron-builder install-app-deps",
+  "build": "electron-builder --mac --windows --linux",
+  "build:windows": "electron-builder --windows",
+  "build:mac": "electron-builder --mac",
+  "build:linux": "electron-builder --linux",
+  "release": "electron-builder --mac --windows --linux --publish always"
+ },
+ "keywords": [
+  "electron",
+  "voice",
+  "wrapper",
+  "desktop",
+  "google"
+ ],
+ "author": "jllankfo@ncsu.edu",
+ "license": "ISC",
+ "devDependencies": {
+  "electron": "^10.1.6",
+  "electron-builder": "^22.9.1"
+ }
 }
