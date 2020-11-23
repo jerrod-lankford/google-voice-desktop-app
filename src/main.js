@@ -5,11 +5,13 @@ const path = require('path');
 const { ipcMain } = require('electron')
 
 // Constants
+const appPath = app.getAppPath();
 const REFRESH_RATE = 1000; // 1 seconds
-const iconTray = `${process.resourcesPath}/images/tray-Google_Voice_icon_(2020).png`;
-const iconTrayDirty = `${process.resourcesPath}/images/tray-dirty-Google_Voice_icon_(2020).png`;
-const icon = nativeImage.createFromPath(
-    `${process.resourcesPath}/images/1024px-Google_Voice_icon_(2020).png`
+const icon = `${appPath}/images/64px-Google_Voice_icon_(2020).png`;
+const iconTray = `${appPath}/images/tray-Google_Voice_icon_(2020).png`;
+const iconTrayDirty = `${appPath}/images/tray-dirty-Google_Voice_icon_(2020).png`;
+const dockIcon = nativeImage.createFromPath(
+    `${appPath}/images/1024px-Google_Voice_icon_(2020).png`
 );
 
 // Globals
@@ -39,13 +41,14 @@ app.on('activate', () => {
 // Setup timer to keep dock notifications up to date
 setInterval(updateNotifications.bind(this, app), REFRESH_RATE);
 
-app.dock && app.dock.setIcon(icon);
+app.dock && app.dock.setIcon(dockIcon);
 app.whenReady().then(createWindow);
 
 function createWindow() {
     win = new BrowserWindow({
         width: 1200,
         height: 900,
+        icon,
         webPreferences: {
             preload: path.join(__dirname, "preload.js"),
             nodeIntegration: true
