@@ -5,11 +5,11 @@ const path = require('path');
 const { ipcMain } = require('electron')
 
 // Constants
-const REFRESH_RATE = 5000; // 5 seconds
-const iconTray = `${app.getAppPath()}/images/tray-Google_Voice_icon_(2020).png`;
-const iconTrayDirty = `${app.getAppPath()}/images/tray-dirty-Google_Voice_icon_(2020).png`;
+const REFRESH_RATE = 1000; // 1 seconds
+const iconTray = `${process.resourcesPath}/images/tray-Google_Voice_icon_(2020).png`;
+const iconTrayDirty = `${process.resourcesPath}/images/tray-dirty-Google_Voice_icon_(2020).png`;
 const icon = nativeImage.createFromPath(
-    `${app.getAppPath()}/public/1024px-Google_Voice_icon_(2020).png`
+    `${process.resourcesPath}/images/1024px-Google_Voice_icon_(2020).png`
 );
 
 // Globals
@@ -121,7 +121,7 @@ function sendCountsToDockWindows(num) {
     if (num) {
         badgeGenerator.generate(num).then((base64) => {
             const image = nativeImage.createFromDataURL(base64);
-            win.setOverlayIcon(image, 'Unread notifications');
+            win.setOverlayIcon(image, 'You have new messages and/or calls');
         });
     } else {
         win.setOverlayIcon(null, '');
@@ -144,18 +144,18 @@ function createTray(iconPath, tipText) {
 
 	appIcon.setToolTip(tipText);
 
-    appIcon.on('double-click', function (event) {
+    appIcon.on('click', function (event) {
         win && win.show();
     });
 
     appIcon.setContextMenu(Menu.buildFromTemplate([
         {
-            label: 'Show', click: function () {
+            label: 'Open', click: function () {
                 win && win.show();
             }
         },
         {
-            label: 'Exit', click: function () {
+            label: 'Quit', click: function () {
                 app.isQuiting = true;
                 app.quit();
             }
