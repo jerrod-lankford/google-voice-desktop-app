@@ -5,7 +5,9 @@ I'm annoyed at the lack of desktop app for voice, like hangouts had.
 It just lets you keep voice open without a chrome browser. It will also check the dom for notifications and display a badge in the task bar and closing the app will send it to a tray instead of closing.
 
 ## Support
-Currently supports both OSX, Windows 10 & Ubuntu 
+Currently supports both OSX, Windows 10 & Ubuntu
+
+Questions? Ideas? Join us in discord https://discord.gg/htpzmxz9
 
 ## Install
 Go to the [Releases Page](https://github.com/Jerrkawz/google-voice-desktop-app/releases) and download the release for your OS.
