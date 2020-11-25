@@ -1,0 +1,11 @@
+/* https://github.com/dracula/dracula-theme */
+@include 'base.css';
+
+/* Color Palette */
+html {
+    --background: #002b36;
+    --foreground: white;
+    --sent-background: #2aa198;
+    --recieved-background: #b58900 ;
+    --selected: #839496;
+}

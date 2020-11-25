@@ -1,0 +1,12 @@
+Go back to design phase for theming.
+
+Am i over complicating? Should i just provide a color palette and do the rest of the injecting under the covers with simplier selectors and !importants
+Should i use scss?
+Should i have more of a component structure
+
+5 page regions that need styling, and sub regions within those pages
+I probably need to vastly reduce the custom style tags
+Could i create a base stylesheet with all the shit, and themes that just wanted to override the pallette could do that? Does this require inheritance? Can i runtime compile scss? AAHHH
+
+// This will use the css selectors from the base stylesheet, and all you have to do is modify the color palette
+@import 'base';

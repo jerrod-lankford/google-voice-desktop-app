@@ -1,0 +1,30 @@
+/* https://github.com/dracula/dracula-theme */
+
+/* Color Palette */
+html {
+    --background: white;
+    --foreground: #5a5a5a;
+    --sent-background: #78c2ad;
+    --recieved-background: #6cc3d5;
+    --selected: rgba(0, 0, 0, 0.075);
+}
+
+@include 'base.css';
+
+/* Override some of the default values of base.css. Thats why they come after the include */
+navbar__,
+navbar-search__ {
+    background-color: var(--sent-background);
+}
+
+navbar-title__,
+navbar__ input,
+navbar__ svg,
+navbar-search__ svg {
+    color: var(--background);
+}
+
+conversation-recieved__,
+conversation-sent__ {
+    color: var(--background);
+}

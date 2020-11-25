@@ -1,0 +1,92 @@
+/* Dont use !important on these styles, we will inject it for you */
+navbar__,
+navbar-search__ {
+    background-color: var(--background);
+}
+
+navbar-title__,
+navbar__ input,
+navbar__ svg,
+navbar-search__ svg {
+    color: var(--foreground);
+}
+
+side-nav__ {
+    background-color: var(--background);
+}
+
+side-nav-item__,
+side-nav-item__ svg {
+    color: var(--foreground);
+}
+
+side-nav-item-active__ {
+    background-color: var(--selected);
+}
+
+side-nav-item-active__ svg {
+    color: var(--foreground);
+}
+
+conversation__,
+conversation-header__,
+conversation-footer__
+{
+    background-color: var(--background);
+}
+
+conversation-title__,
+conversation-footer__ textarea,
+conversation-footer__ textarea::placeholder,
+conversation-footer__ svg,
+conversation-header__ svg {
+    color: var(--foreground);
+}
+
+conversation-link__ {
+    background: inherit;
+    color: inherit;
+}
+
+conversation-footer__ textarea::placeholder {
+    opacity: .5;
+}
+
+conversation-recieved__,
+conversation-sent__ {
+    color: var(--foreground);
+    border-radius: 2rem;
+}
+
+conversation-recieved__ {
+    background-color: var(--recieved-background);
+}
+
+conversation-sent__ {
+    background-color: var(--sent-background);
+}
+
+conversation-summary__,
+conversation-timestamp__ {
+    color: var(--foreground);
+}
+
+list__ {
+    background-color: var(--background);
+}
+
+list-item__,
+list-item__ svg {
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+list-item-active__,
+list-item__:hover,
+list-item__:hover svg {
+    background-color: var(--selected);
+}
+
+list-item-heading__ {
+    color: var(--foreground);
+}

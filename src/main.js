@@ -1,9 +1,9 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu } = require('electron');
+const { app, nativeImage, BrowserWindow, Tray, Menu, icpMain } = require('electron');
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
-const { ipcMain } = require('electron');
+const Injector = require('./utils/classInjector');
 
 // Constants
 const appPath = app.getAppPath();
@@ -64,7 +64,11 @@ function createWindow() {
     })
     win.removeMenu();
     win.loadURL('https://voice.google.com', { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:82.0) Gecko/20100101 Firefox/82.0' });
-    //win.webContents.openDevTools();
+    win.webContents.openDevTools();
+
+    win.webContents.on('did-finish-load', () => {
+        (new Injector(app, win, `${app.getAppPath()}/src/themes/solar.css`)).inject();
+    });
 
     if (tray) {
         tray.destroy;
