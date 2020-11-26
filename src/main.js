@@ -1,5 +1,5 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu, icpMain } = require('electron');
+const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain } = require('electron');
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
