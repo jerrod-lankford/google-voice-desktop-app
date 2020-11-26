@@ -1,8 +1,9 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu } = require('electron')
-const BadgeGenerator = require('./badge_generator')
+const { app, nativeImage, BrowserWindow, Tray, Menu } = require('electron');
+const contextMenu = require('electron-context-menu');
+const BadgeGenerator = require('./badge_generator');
 const path = require('path');
-const { ipcMain } = require('electron')
+const { ipcMain } = require('electron');
 
 // Constants
 const appPath = app.getAppPath();
@@ -19,6 +20,12 @@ let lastNotification = 0;
 let badgeGenerator;
 let tray;
 let win;
+
+// Setup context menu
+contextMenu({
+    showSaveImage: true,
+    showInspectElement: true
+});
 
 // Setup notification shim to focus window
 ipcMain.on('notification-clicked', () => {
@@ -50,6 +57,7 @@ function createWindow() {
         height: 900,
         icon,
         webPreferences: {
+            spellcheck: true,
             preload: path.join(__dirname, "preload.js"),
             nodeIntegration: true
         }
