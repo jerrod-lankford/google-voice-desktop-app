@@ -1,6 +1,6 @@
 {
  "name": "voice-desktop-app",
- "version": "1.0.6",
+ "version": "1.0.7",
  "description": "An unofficial replacement for Hangouts users on Google Voice",
  "main": "src/main.js",
  "build": {
