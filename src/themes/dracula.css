@@ -1,5 +1,6 @@
-/* https://github.com/dracula/dracula-theme */
+@include 'base.css';
 
+/* https://github.com/dracula/dracula-theme */
 /* Color Palette */
 html {
     --background: #282a36;
@@ -12,5 +13,3 @@ html {
 side-nav__ {
     border-right: 1px solid var(--foreground);
 }
-
-@include 'base.css';

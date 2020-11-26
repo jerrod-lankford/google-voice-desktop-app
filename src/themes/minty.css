@@ -1,4 +1,4 @@
-/* https://github.com/dracula/dracula-theme */
+@include 'base.css';
 
 /* Color Palette */
 html {
@@ -9,7 +9,6 @@ html {
     --selected: rgba(0, 0, 0, 0.075);
 }
 
-@include 'base.css';
 
 /* Override some of the default values of base.css. Thats why they come after the include */
 navbar__,

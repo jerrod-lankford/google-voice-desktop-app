@@ -87,6 +87,29 @@ list-item__:hover svg {
     background-color: var(--selected);
 }
 
-list-item-heading__ {
+list-item-heading__,
+list-item-heading__ input,
+list-item-heading__ input::placeholder {
+    color: var(--foreground);
+}
+
+dial-pad__ {
+    background-color: var(--background);
+}
+
+dial-pad-button__ {
+    color: var(--foreground);
+}
+
+dial-pad-button__:hover {
+    background-color: var(--selected);
+}
+
+dial-pad-toggle__ {
+    background-color: var(--background);
+    color: var(--foreground);
+}
+
+dial-pad-toggle__ svg {
     color: var(--foreground);
 }

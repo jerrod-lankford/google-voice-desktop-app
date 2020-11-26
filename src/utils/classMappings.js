@@ -1,8 +1,7 @@
 /** 
  * These mappings may seem ridiculous and non-sensesical, and they are... but they are for a reason
  * I tried to pick identifiers in google voice's cryptic ass css classes that are not likely to change
- * but I also had to make them very specific so that they win out over the default styles
- * (and we dont have to use a bunch of !important's everywhere)
+ * They roughly correlate to components on the page. See THEMES.md for more details on these components
  */
 module.exports = {
     "navbar": [
@@ -33,6 +32,7 @@ module.exports = {
     ],
     "conversation-title": [
         "gv-message-list-header [gv-test-id='conversation-title']",
+        "gv-message-list-header [gv-test-id='conversation-subtitle']",
         "[aria-label='Group message']"
     ],
     "conversation-summary": [
@@ -63,6 +63,10 @@ module.exports = {
     "list-item": [
         "gv-thread-item .layout-row.md-ink-ripple",
         "[gv-test-id='send-new-message']", // send new message button
+        "gv-recipient-picker md-content", // Recipient picker wrapper
+        "gv-recipient-picker > div", // Select recipient picker on new call screen
+        "gv-call-as-banner", // Call as banner on phone number right panel
+        "gv-make-call-panel .layout-align-start-center", // Enter a name or number box
         "gv-frequent-contact-card",
         "gv-contact-item"
     ],
@@ -75,10 +79,22 @@ module.exports = {
         "gv-frequent-contact-card [layout-align='start center'] > span",
         "gv-contact-item div.layout-row :first-child",
         "gv-contact-list .gmat-overline",
-        ".gmat-subhead-2" // send new message text
+        ".gmat-subhead-2", // send new message text
+        "gv-recipient-picker md-content", // recipient picker wrapper
+        "gv-recipient-picker md-content md-input-container label", // recipient picker placeholder label
+        "gv-call-as-banner .phone-number-details .phone-number-name", // Call as banner phone number name
+        "gv-call-as-banner .phone-number-details .phone-number", // Call as banner phone number
+        "gv-make-call-panel .layout-align-start-center md-input-container"
     ],
-    "background-color-hacks": [
-        "gv-omnibar .gvPageRoot"
+    "dial-pad": [
+        "gv-dialpad > div"
+    ],
+    "dial-pad-button": [
+        "gv-dialpad [role='gridcell'] > div",
+        "gv-dialpad [role='gridcell'] .gmat-caption"
+    ],
+    "dial-pad-toggle" : [
+        "gv-dialpad-toggle button"
     ]
 }
 

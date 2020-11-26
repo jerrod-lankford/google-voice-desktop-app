@@ -67,7 +67,7 @@ function createWindow() {
     win.webContents.openDevTools();
 
     win.webContents.on('did-finish-load', () => {
-        (new Injector(app, win, `${app.getAppPath()}/src/themes/solar.css`)).inject();
+        (new Injector(app, win, `${app.getAppPath()}/src/themes/dracula.css`)).inject();
     });
 
     if (tray) {
