@@ -1,0 +1,29 @@
+.main-container {
+    height: 100%;
+    display: flex;
+}
+
+.main-nav {
+    height: 100%;
+    margin-right: 10px;
+    flex-shrink: 1;
+}
+
+.main-content  {
+    margin: 20px;
+    flex-grow: 1;
+}
+
+.nav-link {
+    color: #00796b;
+    border-radius: 0 24px 24px 0
+}
+
+.nav-link:hover {
+    color: #00796b;
+}
+
+.nav-link.active {
+    background-color:  rgb(224, 242, 241);
+
+}

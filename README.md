@@ -31,3 +31,10 @@ To build yourself you can run
 
 ## Screenshots
 ![Windows](/images/windows.png?raw=true")
+
+## Attributions
+<div>Icons made by <a href="https://www.flaticon.com/authors/dmitri13" title="dmitri13">dmitri13</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+Dracula https://github.com/dracula/dracula-theme
+
+Solar / Minty https://bootswatch.com/
