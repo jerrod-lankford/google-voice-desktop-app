@@ -42,7 +42,8 @@ If all you want to do is create a theme that looks like one of the existing them
 
 The easiest way to visualize these components is to create a new theme with background colors for each component. Create a new theme as mentioned in the first section or overwrite one of the existing ones. For example doing this:
 
-`@use 'base';
+```
+@use 'base';
 
 /** Hacky border color fix for conversation list */
 %conversation {
@@ -64,49 +65,16 @@ The easiest way to visualize these components is to create a new theme with back
 
 %dial-pad {
     background-color: blue;
-}`
+}
+```
 
 Gives us the follow output so we can easily tell which component is which.
-<screenshot>
-
- @extend %conversation-header;
-}
-
-gv-message-list-header [gv-test-id='conversation-title'],
-gv-message-list-header [gv-test-id='conversation-subtitle'],
-[aria-label='Group message'] {
-    @extend %conversation-title;
-}
-
-gv-inbox-summary-ng2 .gv-inbox-summary .greeting,
-gv-inbox-summary-ng2 .gv-inbox-summary .status {
-    @extend %conversation-summary;
-}
-
-gv-message-entry > div {
-    @extend %conversation-footer;
-}
-
-gv-message-item [layout-align='start start'] [gv-test-id='bubble'] {
-    @extend %conversation-message-recieved;
-}
-
-gv-message-item [layout-align='start end'] [gv-test-id='bubble'] {
-    @extend %conversation-message-sent;
-}
-
-[gv-test-id='sms-sender-time-stamp'] > span {
-    @extend %conversation-timestamp;
-}
-
-gv-message-item gv-annotation a {
-    @extend %conversation-link;
-}
+![Components](screenshots/components.png)
 
 ## More complex themeing and modifying mappings.scss
 You are really asking for it huh... If you continue you should have at least a decent understanding of css and css selectors, and possibly scss as well.
 Alright fine. The way this crazy shit works is that all of the components map to a selector or a group of selectors within the app. If you want to see what a certain component maps to (%navbar for example) you
-can look at the `src/themes/mappings.scss` file. For example %conversation-link maps to the css selector `gv-message-item gv-annotation a`. Most of them are not this simple. Some of them map to many different things, for example list-item has like 10 different mappings because we have to style all the components that can possibly show up inside our lists.
+can look at the `src/themes/mappings.scss` file. For example `%conversation-link` maps to the css selector `gv-message-item gv-annotation a`. Most of them are not this simple. Some of them map to many different things, for example list-item has like 10 different mappings because we have to style all the components that can possibly show up inside our lists.
 
 If you need to target a component specifically for your theme then you can always include a one-off css selector in your theme, its going to work fine but I would recommend talking to me and trying to understand my thought process when creating these components
 and perhaps it makes sense to pull out another component by itself.
