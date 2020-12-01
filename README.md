@@ -22,9 +22,9 @@ Simply uzip and drag into the applications folder (mac) or run the executable (w
 ## Themes
 New in 1.1 we now have different themes! You can change your theme by clicking on the customize menu on the left side of the page
 
-<screenshot>
+![Customize](/screenshots/customize.png?raw=true")
 
-Not only themes but also a system for themeing! If you want to create your own theme and contribute back to the project you can do that `<link here>`
+Not only themes but also a system for themeing! If you want to create your own theme and contribute back to the project you can do that [here](THEMES.md)
 
 ## Run From Source
 `git clone git@github.com:Jerrkawz/google-voice-desktop-app.git`
@@ -37,15 +37,19 @@ To build yourself you can run
 `npm run build:windows` or `npm run build:mac` or `npm run build:linux`
 
 ## Screenshots
-![Windows](/images/windows.png?raw=true")
+![Windows](/screenshots/windows.png?raw=true")
 
 Dracula Theme:
+![Dracula](/screenshots/dracula.png?raw=true")
 
 Solar Theme:
+![Solar](/screenshots/solar.png?raw=true")
 
 Minty Theme:
+![Minty](/screenshots/minty.png?raw=true")
 
 Cerulean Theme:
+![Cerulean](/screenshots/cerulean.png?raw=true")
 
 ## Attributions
 <div>Customize Icon made by <a href="https://www.flaticon.com/authors/dmitri13" title="dmitri13">dmitri13</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
