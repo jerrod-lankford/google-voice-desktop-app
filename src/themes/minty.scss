@@ -1,0 +1,32 @@
+
+/* Color Palette */
+$background: white;
+$foreground: #5a5a5a;
+$primary: #78c2ad;
+$secondary: #6cc3d5;
+$selection: rgba(0, 0, 0, 0.075);
+
+@use 'base';
+
+/* Override some of the default values of base.css. Thats why they come after the include */
+%navbar,
+%navbar-search {
+    background-color: $primary;
+}
+
+%navbar-title,
+%navbar input,
+%navbar svg,
+%navbar input::placeholder,
+%navbar-search svg {
+    color: $background;
+}
+
+%navbar input::placeholder {
+    opacity: .7;
+}
+
+%conversation-message-recieved,
+%conversation-message-sent {
+    color: $background;
+}

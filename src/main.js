@@ -1,11 +1,14 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu } = require('electron');
+const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView } = require('electron');
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
-const { ipcMain } = require('electron');
+const ThemeInjector = require('./utils/themeInjector');
+const MenuInjector = require('./utils/menuInjector');
+const Store = require('electron-store');
 
 // Constants
+const store = new Store();
 const appPath = app.getAppPath();
 const REFRESH_RATE = 1000; // 1 seconds
 const icon = `${appPath}/images/64px-Google_Voice_icon_(2020).png`;
@@ -18,6 +21,7 @@ const dockIcon = nativeImage.createFromPath(
 // Globals
 let lastNotification = 0;
 let badgeGenerator;
+let themeInjector;
 let tray;
 let win;
 
@@ -30,8 +34,30 @@ contextMenu({
 // Setup notification shim to focus window
 ipcMain.on('notification-clicked', () => {
     win && win.show();
-  });
+});
 
+ipcMain.on('show-customize', () => {
+    const win = new BrowserWindow({ width: 800, height: 600});
+    win.prefs = store.get('prefs')  || {};
+
+    const view = new BrowserView({
+        webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true
+        }
+    });
+    win.setBrowserView(view);
+    view.setBounds({ x: 0, y: 0, width: 800, height: 600 });
+    view.webContents.loadFile('src/pages/customize.html');
+    // view.webContents.openDevTools();
+});
+
+ipcMain.on('pref-change', (e, theme) => {
+    themeInjector.inject(theme);
+    const prefs = store.get('prefs') || {};
+    prefs.theme = theme;
+    store.set('prefs', prefs);
+});
 
 // Show window when clicking on macosx dock icon
 app.on('activate', () => {
@@ -64,7 +90,14 @@ function createWindow() {
     })
     win.removeMenu();
     win.loadURL('https://voice.google.com', { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:82.0) Gecko/20100101 Firefox/82.0' });
-    //win.webContents.openDevTools();
+    // win.webContents.openDevTools();
+
+    win.webContents.on('did-finish-load', () => {
+        const theme = store.get('prefs.theme')  || 'default';
+        themeInjector = new ThemeInjector(app, win);
+        themeInjector.inject(theme);
+        (new MenuInjector(win)).inject();
+    });
 
     if (tray) {
         tray.destroy;
