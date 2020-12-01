@@ -92,7 +92,7 @@ gv-recipient-picker md-content, // Recipient picker wrapper
 gv-recipient-picker > div, // Select recipient picker on new call screen
 gv-call-as-banner, // Call as banner on phone number right panel
 gv-make-call-panel > div > div:nth-child(2), // Call panel enter a name or number
-gv-contact-item,
+gv-contact-item > div,
 gv-contact-card,
 gv-frequent-contact-card {
     @extend %list-item;

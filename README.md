@@ -19,6 +19,13 @@ Simply uzip and drag into the applications folder (mac) or run the executable (w
 
 **Ubuntu Note: You will have to make the AppImage executable in order to run it. Right Click > Properties > Permissions > Allow Executing file as a program**
 
+## Themes
+New in 1.1 we now have different themes! You can change your theme by clicking on the customize menu on the left side of the page
+
+<screenshot>
+
+Not only themes but also a system for themeing! If you want to create your own theme and contribute back to the project you can do that `<link here>`
+
 ## Run From Source
 `git clone git@github.com:Jerrkawz/google-voice-desktop-app.git`
 
@@ -32,9 +39,17 @@ To build yourself you can run
 ## Screenshots
 ![Windows](/images/windows.png?raw=true")
 
+Dracula Theme:
+
+Solar Theme:
+
+Minty Theme:
+
+Cerulean Theme:
+
 ## Attributions
-<div>Icons made by <a href="https://www.flaticon.com/authors/dmitri13" title="dmitri13">dmitri13</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+<div>Customize Icon made by <a href="https://www.flaticon.com/authors/dmitri13" title="dmitri13">dmitri13</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 Dracula https://github.com/dracula/dracula-theme
 
-Solar / Minty https://bootswatch.com/
+Solar / Minty / Cerulean https://bootswatch.com/
