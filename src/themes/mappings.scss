@@ -31,11 +31,16 @@ gv-side-nav a.navListItem.gmat-list-item-active {
     @extend %side-nav-item-active;
 }
 
+.navItemBadge {
+    @extend %side-nav-item-badge;
+}
+
 /* Conversation */
 gv-message-list,
 gv-voicemail-player md-content,
 gv-inbox-summary-ng2,
-gv-thread-details {
+gv-thread-details,
+gv-messaging-view md-content { // Message view when clicking someones name after search
     @extend %conversation;
 }
 
@@ -75,20 +80,21 @@ gv-message-item gv-annotation a {
 }
 
 /** Lists */
-gv-conversation-list,
-#contact-list,
-body > [role='listbox'] {
+gv-conversation-list, // messages list
+#contact-list, // All contacts list on right
+body > [role='listbox'] { // List box for the contact search
     @extend %list;
 }
 
-gv-thread-item .layout-row.md-ink-ripple,
+gv-thread-item > div,
 [gv-test-id='send-new-message'], // send new message button
 gv-recipient-picker md-content, // Recipient picker wrapper
 gv-recipient-picker > div, // Select recipient picker on new call screen
 gv-call-as-banner, // Call as banner on phone number right panel
-gv-make-call-panel .layout-align-start-center, // Enter a name or number box
-gv-frequent-contact-card,
-gv-contact-item {
+gv-make-call-panel > div > div:nth-child(2), // Call panel enter a name or number
+gv-contact-item,
+gv-contact-card,
+gv-frequent-contact-card {
     @extend %list-item;
 }
 
@@ -97,23 +103,26 @@ gv-thread-item > div.layout-row[aria-selected='true'] {
 }
 
 gv-thread-item div.layout-row gv-annotation[gv-test-id='item-contact'],
-gv-frequent-contact-card [layout-align='start start'] > div,
-gv-frequent-contact-card [layout-align='start center'] > span,
 gv-contact-list .gmat-overline,
 .gmat-subhead-2, // send new message text
-gv-contact-item div.layout-row :first-child,
 gv-recipient-picker md-content, // recipient picker wrapper
 gv-recipient-picker md-content md-input-container label, // recipient picker placeholder label
 gv-call-as-banner .phone-number-details .phone-number-name, // Call as banner phone number name
 gv-call-as-banner .phone-number-details .phone-number, // Call as banner phone number
 gv-make-call-panel .layout-align-start-center md-input-container,
+gv-frequent-contact-card .gmat-body-2 div:first-child,
+gv-contact-item .gmat-body-2 gv-annotation, // All contacts heading on right
+gv-contact-card .gmat-body-2 div:first-child div:nth-child(2), // Contact card name after clicking on someones name in the search bar
+gv-recent-search-item gv-annotation,
 gv-call-log-item .primaryText {
     @extend %list-item-heading;
 }
 
 gv-thread-item-detail :first-child,
 gv-call-log-item .secondaryText,
-gv-frequent-contact-card .grey-700 {
+gv-frequent-contact-card .gmat-body-2 > div > span,
+gv-contact-card .gmat-body-2 > div > div:nth-child(3), // Contact card phone number after clicking on someones name in the search bar
+gv-contact-item > div > div > div:nth-child(2) { // Phone number under all contacts on right
     @extend %list-item-detail;
 }
 

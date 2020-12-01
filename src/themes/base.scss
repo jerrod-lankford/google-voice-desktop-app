@@ -31,6 +31,10 @@
     color: $foreground;
 }
 
+%side-nav-item-badge {
+    background-color: $primary;
+}
+
 /* Conversation */
 %conversation,
 %conversation-header,
@@ -81,16 +85,18 @@
     background-color: $background;
 }
 
-%list-item,
-%list-item svg {
+%list-item {
     background-color: $background;
     color: $foreground;
 }
 
+%list-item svg {
+    color: $foreground;
+}
+
 %list-item-active,
-%list-item:hover,
-%list-item:hover svg {
-    background-color: $background;
+%list-item:hover {
+    background-color: $selection;
 }
 
 %list-item-heading,

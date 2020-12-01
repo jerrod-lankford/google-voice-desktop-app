@@ -10,3 +10,8 @@ $selection: #44475a;
 %side-nav {
     border-right: 1px solid $foreground;
 }
+
+/** Hacky border color fix for conversation list */
+%conversation > div {
+    border-color: $foreground;
+}

@@ -9,3 +9,8 @@ $selection: #839496;
 
 
 @use 'base';
+
+/** Hacky border color fix for conversation list */
+%conversation > div {
+    border-color: $foreground;
+}
