@@ -71,7 +71,8 @@ The easiest way to visualize these components is to create a new theme with back
 
 %dial-pad {
     background-color: blue;
-}```
+}
+```
 
 Gives us the follow output so we can easily tell which component is which.
 ![Components](screenshots/components.png)
