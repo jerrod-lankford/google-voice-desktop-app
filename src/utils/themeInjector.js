@@ -1,8 +1,9 @@
 const sass = require('sass');
 const fs = require('fs');
+const path = require('path');
 
-const BASE = 'src/themes/base.scss';
-const MAPPINGS = 'src/themes/mappings.scss';
+const BASE = `base.scss`;
+const MAPPINGS = `mappings.scss`;
 
 module.exports = class Injector {
     constructor(app, win) {
@@ -18,8 +19,8 @@ module.exports = class Injector {
 
         if (theme !== 'default') {
             try {
-                const file = fs.readFileSync(`${this.app.getAppPath()}/src/themes/${theme}.scss`, 'utf-8');
-                const data = joinImports(file);
+                const file = fs.readFileSync(path.join(this.app.getAppPath(), 'src', 'themes', `${theme}.scss`), 'utf-8');
+                const data = joinImports(this.app, file);
                 const result = sass.renderSync({data});
                 const styles = result.css.toString().replace(/;/g, ' !important;');
                 if (this.win) {
@@ -40,9 +41,9 @@ module.exports = class Injector {
  * need to be able to split our selectors and placeholder selectors into different files for neatness. Anyway this is just a
  * simple function to recombine multiple files and then let sass process that
  */
-function joinImports(file) {
-    const base = fs.readFileSync(BASE, 'utf-8');
-    const mappings = fs.readFileSync(MAPPINGS, 'utf-8');
+function joinImports(app, file) {
+    const base = fs.readFileSync(path.join(app.getAppPath(), 'src', 'themes', BASE), 'utf-8');
+    const mappings = fs.readFileSync(path.join(app.getAppPath(), 'src', 'themes', MAPPINGS), 'utf-8');
     let contents = file.replace("@use 'base';", base);
     contents = contents.replace("@use 'mappings';", mappings);
 

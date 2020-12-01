@@ -11,11 +11,12 @@ const Store = require('electron-store');
 const store = new Store();
 const appPath = app.getAppPath();
 const REFRESH_RATE = 1000; // 1 seconds
-const icon = `${appPath}/images/64px-Google_Voice_icon_(2020).png`;
-const iconTray = `${appPath}/images/tray-Google_Voice_icon_(2020).png`;
-const iconTrayDirty = `${appPath}/images/tray-dirty-Google_Voice_icon_(2020).png`;
+
+const icon = path.join(appPath, 'images', '64px-Google_Voice_icon_(2020).png');
+const iconTray = path.join(appPath, 'images', 'tray-Google_Voice_icon_(2020).png');
+const iconTrayDirty = path.join(appPath, 'images', 'tray-dirty-Google_Voice_icon_(2020).png');
 const dockIcon = nativeImage.createFromPath(
-    `${appPath}/images/1024px-Google_Voice_icon_(2020).png`
+    path.join(appPath, 'images', '1024px-Google_Voice_icon_(2020).png')
 );
 
 // Globals
@@ -48,7 +49,7 @@ ipcMain.on('show-customize', () => {
     });
     win.setBrowserView(view);
     view.setBounds({ x: 0, y: 0, width: 800, height: 600 });
-    view.webContents.loadFile('src/pages/customize.html');
+    view.webContents.loadFile(path.join(appPath, 'src', 'pages', 'customize.html'));
     // view.webContents.openDevTools();
 });
 
@@ -96,7 +97,7 @@ function createWindow() {
         const theme = store.get('prefs.theme')  || 'default';
         themeInjector = new ThemeInjector(app, win);
         themeInjector.inject(theme);
-        (new MenuInjector(win)).inject();
+        (new MenuInjector(app, win)).inject();
     });
 
     if (tray) {

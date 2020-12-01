@@ -1,10 +1,11 @@
 const fs = require('fs');
+const path = require('path');
 
 module.exports = class Injector {
-    constructor(win) {
-       this.win = win;
-       this.icon = fs.readFileSync('src/utils/iconSnippet.html');
-       this.retries = 5;
+    constructor(app, win) {
+        this.win = win;
+        this.icon = fs.readFileSync(path.join(app.getAppPath(), 'src', 'utils','iconSnippet.html'));
+        this.retries = 5;
     }
 
     inject() {
