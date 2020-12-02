@@ -1,7 +1,7 @@
 {
  "name": "voice-desktop-app",
- "version": "1.0.7",
- "description": "An unofficial replacement for Hangouts users on Google Voice",
+ "version": "1.1.4",
+ "description": "An electron shell wrapper for the google voice app",
  "main": "src/main.js",
  "build": {
   "appId": "com.jerrkawz.voiceDesktop",
@@ -36,9 +36,13 @@
  ],
  "author": "jllankfo@ncsu.edu",
  "license": "ISC",
+ "dependencies": {
+    "electron-context-menu": "^2.3.0",
+    "electron-store": "^6.0.1",
+    "sass": "^1.29.0"
+ },
  "devDependencies": {
   "electron": "^10.1.6",
-  "electron-builder": "^22.9.1",
-  "electron-context-menu": "^2.3.0"
+  "electron-builder": "^22.9.1"
  }
 }

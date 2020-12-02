@@ -1,0 +1,135 @@
+/* Dont use !important on these styles, we will inject it for you */
+
+/* Navbar */
+%navbar,
+%navbar-search {
+    background-color: $background;
+}
+
+%navbar-title,
+%navbar input,
+%navbar svg,
+%navbar-search svg  /* Check if needed */{
+    color: $foreground;
+}
+
+/** Side Nav */
+%side-nav {
+    background-color: $background;
+}
+
+%side-nav-item,
+%side-nav-item svg {
+    color: $foreground;
+}
+
+%side-nav-item-active {
+    background-color: $selection;
+}
+
+%side-nav-item-active svg {
+    color: $foreground;
+}
+
+%side-nav-item-badge {
+    background-color: $primary;
+}
+
+/* Conversation */
+%conversation,
+%conversation-header,
+%conversation-footer
+{
+    color: $foreground;
+    background-color: $background;
+}
+
+%conversation-title,
+%conversation-footer textarea,
+%conversation-footer textarea::placeholder,
+%conversation-footer svg,
+%conversation-header svg {
+    color: $foreground;
+}
+
+%conversation-link {
+    background: inherit;
+    color: inherit;
+}
+
+%conversation-footer textarea::placeholder {
+    opacity: .5;
+}
+
+%conversation-message-recieved,
+%conversation-message-sent {
+    color: $foreground;
+    border-radius: 2rem;
+}
+
+%conversation-message-recieved {
+    background-color: $secondary;
+}
+
+%conversation-message-sent {
+    background-color: $primary;
+}
+
+%conversation-summary,
+%conversation-timestamp {
+    color: $foreground;
+}
+
+/* Lists */
+%list {
+    background-color: $background;
+}
+
+%list-item {
+    background-color: $background;
+    color: $foreground;
+}
+
+%list-item svg {
+    color: $foreground;
+}
+
+%list-item-active,
+%list-item:hover {
+    background-color: $selection;
+}
+
+%list-item-heading,
+%list-item-heading input,
+%list-item-heading input::placeholder {
+    color: $foreground;
+}
+
+%list-item-detail {
+    color: $foreground;
+    opacity: .6;
+}
+
+/* Dial pad */
+%dial-pad {
+    background-color: $background;
+}
+
+%dial-pad-button {
+    color: $foreground;
+}
+
+%dial-pad-button:hover {
+    background-color: $selection;
+}
+
+%dial-pad-toggle {
+    background-color: $background;
+    color: $foreground;
+}
+
+%dial-pad-toggle svg {
+    color: $foreground;
+}
+
+@use 'mappings';
