@@ -230,7 +230,6 @@ function createTray(iconPath, tipText) {
 
 function saveWindowSize() {
     const bounds = win.getBounds();
-    console.log(bounds.width + " x " + bounds.height);
     const prefs = store.get('prefs')  || {};
     prefs.windowWidth = bounds.width;
     prefs.windowHeight = bounds.height;
