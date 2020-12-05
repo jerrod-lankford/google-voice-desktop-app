@@ -31,7 +31,7 @@ gv-side-nav a.navListItem.gmat-list-item-active {
     @extend %side-nav-item-active;
 }
 
-.navItemBadge {
+[role='tablist']:not(.expanded) .navItemBadge {
     @extend %side-nav-item-badge;
 }
 

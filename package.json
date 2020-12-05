@@ -37,9 +37,9 @@
  "author": "jllankfo@ncsu.edu",
  "license": "ISC",
  "dependencies": {
-    "electron-context-menu": "^2.3.0",
-    "electron-store": "^6.0.1",
-    "sass": "^1.29.0"
+  "electron-context-menu": "^2.3.0",
+  "electron-store": "^6.0.1",
+  "sass": "^1.29.0"
  },
  "devDependencies": {
   "electron": "^10.1.6",
