@@ -18,6 +18,8 @@ const iconTrayDirty = path.join(appPath, 'images', 'tray-dirty-Google_Voice_icon
 const dockIcon = nativeImage.createFromPath(
     path.join(appPath, 'images', '1024px-Google_Voice_icon_(2020).png')
 );
+const DEFAULT_WIDTH = 1200;
+const DEFAULT_HEIGHT = 900;
 
 // Globals
 let lastNotification = 0;
@@ -25,6 +27,16 @@ let badgeGenerator;
 let themeInjector;
 let tray;
 let win;
+
+// Only one instance of the app should run
+if (!app.requestSingleInstanceLock()) {
+    app.isQuiting = true;
+    app.quit();
+}
+
+app.on('second-instance', () => {
+    win && win.show();
+});
 
 // Setup context menu
 contextMenu({
@@ -38,8 +50,11 @@ ipcMain.on('notification-clicked', () => {
 });
 
 ipcMain.on('show-customize', () => {
+    const prefs = store.get('prefs')  || {};
     const win = new BrowserWindow({ width: 800, height: 600});
-    win.prefs = store.get('prefs')  || {};
+
+    // Pass into customize menu
+    win.prefs = prefs;
 
     const view = new BrowserView({
         webPreferences: {
@@ -79,9 +94,10 @@ app.dock && app.dock.setIcon(dockIcon);
 app.whenReady().then(createWindow);
 
 function createWindow() {
+    const prefs = store.get('prefs') || {};
     win = new BrowserWindow({
-        width: 1200,
-        height: 900,
+        width: prefs.windowWidth || DEFAULT_WIDTH,
+        height: prefs.windowHeight || DEFAULT_HEIGHT,
         icon,
         webPreferences: {
             spellcheck: true,
@@ -117,6 +133,8 @@ function createWindow() {
     win.on('restore', function (event) {
         win.show();
     });
+
+    win.on('resize', saveWindowSize);
 
     return win;
 }
@@ -208,4 +226,14 @@ function createTray(iconPath, tipText) {
     ]));
 
     return appIcon;
+}
+
+function saveWindowSize() {
+    const bounds = win.getBounds();
+    console.log(bounds.width + " x " + bounds.height);
+    const prefs = store.get('prefs')  || {};
+    prefs.windowWidth = bounds.width;
+    prefs.windowHeight = bounds.height;
+
+    store.set('prefs', prefs);
 }
