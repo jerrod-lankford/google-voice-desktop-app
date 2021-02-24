@@ -7,7 +7,7 @@ It just lets you keep voice open without a chrome browser. It will also check th
 ## Support
 Currently supports both OSX, Windows 10 & Ubuntu
 
-Questions? Ideas? Join us in discord https://discord.gg/htpzmxz9
+Questions? Ideas? Join us in discord https://discord.gg/3SSS6vkKET
 
 ## Install
 Go to the [Releases Page](https://github.com/Jerrkawz/google-voice-desktop-app/releases) and download the release for your OS.
