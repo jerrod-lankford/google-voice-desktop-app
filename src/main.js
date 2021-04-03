@@ -1,5 +1,5 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView } = require('electron');
+const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView, shell } = require('electron');
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
@@ -121,7 +121,12 @@ function createWindow() {
     }
     tray = createTray(iconTray, 'Google Voice Desktop Tray');
 
-    badgeGenerator = new BadgeGenerator(win)
+    badgeGenerator = new BadgeGenerator(win);
+
+    win.webContents.on('new-window', function(e, url) {
+        e.preventDefault();
+        shell.openExternal(url);
+    });
 
 	win.on('close', function (event) {
         if (!app.isQuiting) {
