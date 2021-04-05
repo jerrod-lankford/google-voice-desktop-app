@@ -59,6 +59,7 @@ ipcMain.on('show-customize', () => {
     const view = new BrowserView({
         webPreferences: {
             nodeIntegration: true,
+            contextIsolation: false,
             enableRemoteModule: true
         }
     });
@@ -102,7 +103,8 @@ function createWindow() {
         webPreferences: {
             spellcheck: true,
             preload: path.join(__dirname, "preload.js"),
-            nodeIntegration: true
+            nodeIntegration: true,
+            contextIsolation: false
         }
     })
     win.removeMenu();
