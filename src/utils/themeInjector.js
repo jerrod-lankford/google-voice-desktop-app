@@ -51,7 +51,7 @@ module.exports = class Injector {
         catch (e)
         {
             console.log(e);
-            console.error(`Could not set zoom toe ${zoom}`);
+            console.error(`Could not set zoom to ${zoom}`);
         }
     }
 }
