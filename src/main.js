@@ -75,6 +75,13 @@ ipcMain.on('pref-change', (e, theme) => {
     store.set('prefs', prefs);
 });
 
+ipcMain.on('pref-change-zoom', (e, zoom) => {
+    themeInjector.injectZoom(zoom);
+    const prefs = store.get('prefs') || {};
+    prefs.zoom = zoom;
+    store.set('prefs', prefs);
+});
+
 // Show window when clicking on macosx dock icon
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -113,6 +120,8 @@ function createWindow() {
         const theme = store.get('prefs.theme')  || 'default';
         themeInjector = new ThemeInjector(app, win);
         themeInjector.inject(theme);
+        const zoom = store.get('prefs.zoom')  || 100;
+        themeInjector.injectZoom(zoom); 
         (new MenuInjector(app, win)).inject();
     });
 

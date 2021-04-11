@@ -1,7 +1,7 @@
 
 (function() {
     const { ipcRenderer, remote } = require('electron');
-
+    
     console.log(remote);
     const currentWindow = remote.getCurrentWindow();
     const prefs = currentWindow.prefs || {};
@@ -12,6 +12,14 @@
         const theme = e.target.value;
         ipcRenderer.send('pref-change', theme);
     });
-
     themePicker.value = currentTheme;
+    
+    const currentZoom = prefs.zoom || 100;
+    const zoomSetting = document.getElementById("zoom");
+    zoomSetting.addEventListener('keyup', (e) => {
+         const zoom = e.target.value;
+         ipcRenderer.send('pref-change-zoom', zoom);
+    });
+    zoomSetting.value = currentZoom;
+        
 })();
