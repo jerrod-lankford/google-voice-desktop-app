@@ -1,6 +1,6 @@
 {
  "name": "voice-desktop-app",
- "version": "1.2.1",
+ "version": "1.2.2",
  "description": "An electron shell wrapper for the google voice app",
  "main": "src/main.js",
  "build": {
@@ -17,6 +17,9 @@
     "AppImage"
    ],
    "category": "Office"
+  },
+  "win": {
+   "target": "nsis-web"
   }
  },
  "scripts": {
@@ -25,7 +28,8 @@
   "build:windows": "electron-builder --windows",
   "build:mac": "electron-builder --mac",
   "build:linux": "electron-builder --linux",
-  "release": "electron-builder --mac --windows --linux --publish always"
+  "release": "electron-builder --mac --windows --linux --publish always",
+    "dist": "electron-builder --ia32 --x64 -w"
  },
  "keywords": [
   "electron",
