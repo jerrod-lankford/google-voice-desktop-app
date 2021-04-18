@@ -76,7 +76,7 @@ ipcMain.on('pref-change', (e, theme) => {
 });
 
 ipcMain.on('pref-change-zoom', (e, zoom) => {
-    themeInjector.injectZoom(zoom);
+    setZoom(zoom);
     const prefs = store.get('prefs') || {};
     prefs.zoom = zoom;
     store.set('prefs', prefs);
@@ -121,7 +121,7 @@ function createWindow() {
         themeInjector = new ThemeInjector(app, win);
         themeInjector.inject(theme);
         const zoom = store.get('prefs.zoom')  || 100;
-        themeInjector.injectZoom(zoom); 
+        setZoom(zoom); 
         (new MenuInjector(app, win)).inject();
     });
 
@@ -249,4 +249,24 @@ function saveWindowSize() {
     prefs.windowHeight = bounds.height;
 
     store.set('prefs', prefs);
+}
+
+function setZoom(zoom) {
+    try {
+        if (win) {
+            //some reasonable settings (Chrome does the same)
+            if (zoom >= 500)
+            {
+                zoom = 500; //big but not "that" big    
+            }
+            if (zoom > 25 && zoom <= 500) {
+                win.webContents.setZoomFactor(zoom / 100);
+            }
+        }
+    }
+    catch (e)
+    {
+        console.log(e);
+        console.error(`Could not set zoom to ${zoom}`);
+    }
 }

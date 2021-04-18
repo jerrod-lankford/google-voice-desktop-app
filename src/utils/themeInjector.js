@@ -34,26 +34,6 @@ module.exports = class Injector {
             }
         }
     }
-
-    injectZoom(zoom) {
-        try {
-            if (this.win) {
-                //some reasonable settings (Chrome does the same)
-                if (zoom >= 500)
-                {
-                    zoom = 500; //big but not "that" big    
-                }
-                if (zoom > 25 && zoom <= 500) {
-                    this.win.webContents.setZoomFactor(zoom / 100);
-                }
-            }
-        }
-        catch (e)
-        {
-            console.log(e);
-            console.error(`Could not set zoom to ${zoom}`);
-        }
-    }
 }
 
 /**

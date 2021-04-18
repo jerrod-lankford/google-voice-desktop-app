@@ -16,7 +16,7 @@
     
     const currentZoom = prefs.zoom || 100;
     const zoomSetting = document.getElementById("zoom");
-    zoomSetting.addEventListener('keyup', (e) => {
+    zoomSetting.addEventListener('blur', (e) => {
          const zoom = e.target.value;
          ipcRenderer.send('pref-change-zoom', zoom);
     });
