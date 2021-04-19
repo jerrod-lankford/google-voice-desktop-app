@@ -3,3 +3,4 @@ out/
 dist/
 
 .DS_Store
+.vscode/
