@@ -76,6 +76,13 @@ ipcMain.on('pref-change', (e, theme) => {
     store.set('prefs', prefs);
 });
 
+ipcMain.on('pref-change-zoom', (e, zoom) => {
+    setZoom(zoom);
+    const prefs = store.get('prefs') || {};
+    prefs.zoom = zoom;
+    store.set('prefs', prefs);
+});
+
 // Show window when clicking on macosx dock icon
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -115,6 +122,8 @@ function createWindow() {
         const theme = store.get('prefs.theme')  || 'default';
         themeInjector = new ThemeInjector(app, win);
         themeInjector.inject(theme);
+        const zoom = store.get('prefs.zoom')  || 100;
+        setZoom(zoom); 
         (new MenuInjector(app, win)).inject();
     });
 
@@ -242,4 +251,24 @@ function saveWindowSize() {
     prefs.windowHeight = bounds.height;
 
     store.set('prefs', prefs);
+}
+
+function setZoom(zoom) {
+    try {
+        if (win) {
+            //some reasonable settings (Chrome does the same)
+            if (zoom >= 500)
+            {
+                zoom = 500; //big but not "that" big    
+            }
+            if (zoom > 25 && zoom <= 500) {
+                win.webContents.setZoomFactor(zoom / 100);
+            }
+        }
+    }
+    catch (e)
+    {
+        console.log(e);
+        console.error(`Could not set zoom to ${zoom}`);
+    }
 }
