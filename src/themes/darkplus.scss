@@ -1,0 +1,31 @@
+/* Color palette */
+$background: #131516;
+$foreground: #FFFFFF;
+$primary: #006156;
+$secondary: #003126;
+$selection: #222425;
+$border: #252525;
+
+@use 'base';
+
+%side-nav {
+    border-right: 1px solid $border;
+}
+
+div {
+	border-color: $border;
+}
+mat-divider {
+	border-color: #555555;
+}
+
+::-webkit-scrollbar {
+    background-color: #202324;
+    color: #aba499;
+}
+::-webkit-scrollbar-corner {
+    background-color: #181a1b;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #454a4d;
+}
