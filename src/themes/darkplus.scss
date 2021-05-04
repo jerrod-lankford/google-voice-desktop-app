@@ -22,3 +22,7 @@ mat-divider {
 ::-webkit-scrollbar {
     width: 0px;
 }
+
+%side-nav-item-active svg {
+    color: #30A99b;
+}
