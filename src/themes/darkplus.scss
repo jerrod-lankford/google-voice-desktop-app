@@ -26,3 +26,20 @@ mat-divider {
 %side-nav-item-active svg {
     color: #30A99b;
 }
+
+gv-message-item [layout-align="start start"] [gv-test-id="bubble"], gv-message-item [layout-align="start end"] [gv-test-id="bubble"] {
+    background-color: transparent;
+    border-color: #505050;
+}
+
+.gvHighContrast.gvPageRoot [_nghost-wsp-c15] .caption[_ngcontent-wsp-c15] {
+    color: #82898e;
+}
+
+.gvPageRoot [_nghost-fuk-c15] .caption[_ngcontent-fuk-c15] {
+    color: #82898e;
+}
+
+div .caption {
+	color: #82898e;
+}
