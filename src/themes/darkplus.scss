@@ -27,6 +27,11 @@ mat-divider {
     color: #30A99b;
 }
 
+gv-thread-item-detail :first-child {
+    opacity: 1;
+    color: #999999;
+}
+
 gv-message-item [layout-align="start start"] [gv-test-id="bubble"], gv-message-item [layout-align="start end"] [gv-test-id="bubble"] {
     background-color: transparent;
     border-color: #505050;
@@ -37,9 +42,30 @@ div .caption {
 }
 
 .md-button.md-raised[disabled] {
-    background-color: $secondary;
+    background-color: #0b3163;
+    color: #AAAAAA
 }
 
-.md-button.md-raised[enabled] {
-    background-color: $primary;
+div.call-as-label {
+	color: #858d92;
 }
+
+path[d="M19.59 7L12 14.59 6.41 9H11V7H3v8h2v-4.59l7 7 9-9L19.59 7z"] {
+    color: #d93025;
+    opacity: 1;
+}
+
+path[d="M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z"] {
+    color: #1a73e8;
+    opacity: 1;
+}
+
+path[d="M15 19v-2H8.41L20 5.41 18.59 4 7 15.59V9H5v10h10z"] {
+	color: #1e8e3e;
+	opacity: 1;
+}
+
+gv-contact-list.YYoZ8c-npMLoc {
+	background-color: $background;
+}
+
