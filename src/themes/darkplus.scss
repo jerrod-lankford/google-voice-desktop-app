@@ -35,3 +35,11 @@ gv-message-item [layout-align="start start"] [gv-test-id="bubble"], gv-message-i
 div .caption {
 	color: #82898e;
 }
+
+.md-button.md-raised[disabled] {
+    background-color: $secondary;
+}
+
+.md-button.md-raised[enabled] {
+    background-color: $primary;
+}
