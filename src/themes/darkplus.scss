@@ -42,8 +42,11 @@ div .caption {
 }
 
 .md-button.md-raised[disabled] {
-    background-color: #0b3163;
-    color: #AAAAAA
+    background-color: $secondary;
+}
+
+.md-button.md-raised[disabled] {
+    opacity: 0.5;
 }
 
 div.call-as-label {
@@ -72,4 +75,20 @@ gv-contact-list.YYoZ8c-npMLoc {
 .rkljfb-biJjHb.gmat-caption.flex-noshrink {
     opacity: 1;
     color: #999999;
+}
+
+md-menu-content {
+    background-color: #181A1B;
+}
+
+p.gmat-body-2 {
+    color: #FFF;
+}
+
+.gvHighContrast .mat-icon-button.mat-accent {
+    color: #d5d5d5;
+}
+
+.YYoZ8c-VeKiLd .YYoZ8c-NkdnBe:not([disabled]) {
+    background-color: $primary;
 }
