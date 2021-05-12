@@ -220,3 +220,7 @@ div#mat-select-value-1 {
     padding-top: 11px;
     border-top: initial;
 }
+
+div[ng-class="ctrl.dialpadVisible ? '' : ctrl.CSS.DIALPAD_COLLAPSED"] {
+    background-color: #131516;
+}
