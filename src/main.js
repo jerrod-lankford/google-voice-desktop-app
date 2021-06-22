@@ -83,6 +83,12 @@ ipcMain.on('pref-change-zoom', (e, zoom) => {
     store.set('prefs', prefs);
 });
 
+ipcMain.on('pref-change-start-minimized', (e, startMinimized) => {
+    const prefs = store.get('prefs') || {};
+    prefs.startMinimized = startMinimized;
+    store.set('prefs', prefs);
+});
+
 // Show window when clicking on macosx dock icon
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -151,6 +157,11 @@ function createWindow() {
     });
 
     win.on('resize', saveWindowSize);
+
+    // Hide if startMinimized is true in prefs
+    if (prefs.startMinimized) {
+        win.hide();
+    }
 
     return win;
 }

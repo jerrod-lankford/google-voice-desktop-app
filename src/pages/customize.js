@@ -21,5 +21,13 @@
          ipcRenderer.send('pref-change-zoom', zoom);
     });
     zoomSetting.value = currentZoom;
+
+    const currentStartMinimized = prefs.startMinimized || false;
+    const minimizedSetting = document.getElementById("start-minimized");
+    minimizedSetting.addEventListener('blur', (e) => {
+         const val = e.target.value;
+         ipcRenderer.send('pref-change-start-minimized', val == 'true');
+    });
+    minimizedSetting.value = currentStartMinimized;
         
 })();
