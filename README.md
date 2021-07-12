@@ -17,7 +17,7 @@ Simply uzip and drag into the applications folder (mac) or run the executable (w
 **Mac Note: The mac version is unsigned, so you will have to click "Open Anyway" after running, or go to Settings > Security & Privacy > General > Open Anyway. Sorry not paying for a dev license just for this**
 
 
-**Ubuntu Note: You will have to make the AppImage executable in order to run it. Right Click > Properties > Permissions > Allow Executing file as a program**
+**Linux Note: You will have to make the AppImage executable in order to run it. Right Click > Properties > Permissions > Allow Executing file as a program**
 
 ## Themes
 New in 1.1 we now have different themes! You can change your theme by clicking on the customize menu on the left side of the page
