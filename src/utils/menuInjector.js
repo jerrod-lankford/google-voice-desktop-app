@@ -10,7 +10,7 @@ module.exports = class Injector {
 
     inject() {
         this.win.webContents.executeJavaScript(`document.querySelectorAll('[gv-test-id="sidenav-spam"]').length`).then(len => {
-            console.log('Attemping to inject menu');
+            console.log('Attempting to inject menu');
             if (len > 0) {
                 // Inject menu
                 this.win.webContents.executeJavaScript(`
