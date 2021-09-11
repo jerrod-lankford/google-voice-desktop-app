@@ -135,8 +135,15 @@ function createWindow() {
     badgeGenerator = new BadgeGenerator(win);
 
     win.webContents.on('new-window', function(e, url) {
-        e.preventDefault();
-        shell.openExternal(url);
+        // If the user has clicked the "Add another account" link under their user icon, allow this to
+        // be handled within our application so that the addition/authentication takes place within our
+        // application cache.  Otherwise, for all other URLs, have the system open them using their default
+        // type handler.  The main reason we do this is to ensure that URLs are opened in the user's
+        // browser, where they are likely already signed into services that need authentication.
+        if (!url.startsWith('https://accounts.google.com/AddSession?')) {
+            e.preventDefault();
+            shell.openExternal(url);
+        }
     });
 
 	win.on('close', function (event) {
