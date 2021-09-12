@@ -1,0 +1,226 @@
+/* Color palette */
+$background: #131516;
+$foreground: #e3e3e3;
+$primary: #006156;
+$secondary: #003126;
+$selection: #222425;
+$border: #252525;
+
+@use 'base';
+
+%side-nav {
+    border-right: 1px solid $border;
+}
+
+div {
+	border-color: $border;
+}
+mat-divider {
+	border-color: $border;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+%side-nav-item-active svg {
+    color: #30A99b;
+}
+
+gv-thread-item-detail :first-child {
+    opacity: 1;
+    color: #999999;
+}
+
+gv-message-item [layout-align="start start"] [gv-test-id="bubble"], gv-message-item [layout-align="start end"] [gv-test-id="bubble"] {
+    background-color: transparent;
+    border-color: #505050;
+}
+
+div .caption {
+	color: #82898e;
+}
+
+.md-button.md-raised[disabled] {
+    background-color: $secondary;
+}
+
+.md-button.md-raised[disabled] {
+    opacity: 0.5;
+}
+
+div.call-as-label {
+	color: #858d92;
+}
+
+path[d="M19.59 7L12 14.59 6.41 9H11V7H3v8h2v-4.59l7 7 9-9L19.59 7z"] {
+    color: #d93025;
+    opacity: 1;
+}
+
+path[d="M9 5v2h6.59L4 18.59 5.41 20 17 8.41V15h2V5H9z"] {
+    color: #1a73e8;
+    opacity: 1;
+}
+
+path[d="M15 19v-2H8.41L20 5.41 18.59 4 7 15.59V9H5v10h10z"] {
+	color: #1e8e3e;
+	opacity: 1;
+}
+
+gv-contact-list.YYoZ8c-npMLoc {
+	background-color: $background;
+}
+
+.rkljfb-biJjHb.gmat-caption.flex-noshrink {
+    opacity: 1;
+    color: #999999;
+}
+
+md-menu-content {
+    background-color: #181A1B;
+}
+
+p.gmat-body-2 {
+    color: #FFF;
+}
+
+.gvHighContrast .mat-icon-button.mat-accent {
+    color: #d5d5d5;
+}
+
+.YYoZ8c-VeKiLd .YYoZ8c-NkdnBe:not([disabled]) {
+    background-color: $primary;
+}
+
+/* settings view fixes start here */
+
+.layout-row > md-content {
+    background-color: $background;
+}
+
+.gvPageRoot .W3hWSd span[role=heading] {
+    color: rgb(227, 227, 227);
+}
+
+div.block-container {
+    background-color: #181A1B;
+}
+
+h3.sectionTitle {
+    color: rgb(227,227,227);
+}
+
+.header {
+    color: rgb(220, 220, 220);
+}
+
+span.phone-number {
+    color: rgb(200, 200, 200);
+}
+
+.internalSubheader {
+    color: rgb(180,180,180);
+}
+
+.no-devices.ng-star-inserted {
+    color: rgb(180, 180, 180);
+}
+
+.subheader.ng-star-inserted {
+    color: rgb(180,180,180);
+}
+
+.mat-slide-toggle-bar.mat-slide-toggle-bar-no-side-margin {
+    background-color: rgb(95 95 95);
+}
+
+.gvHighContrast .mat-slide-toggle.mat-primary.mat-checked .mat-slide-toggle-bar {
+    background-color: rgba(0,121,107,0.54);
+}
+
+.device-label {
+    color: rgb(220, 220, 220);
+}
+
+div#LABEL_IDS\.ANONYMOUS_HEADER {
+    color: rgb(220, 220, 220);
+}
+
+.deviceLabel {
+    color: rgb(220, 220, 220);
+}
+
+.internalHeader {
+    color: rgb(220, 220, 220);
+}
+
+.mat-form-field-appearance-outline[_ngcontent-egk-c24] .mat-form-field-infix {
+    padding-top: 11px;
+}
+
+.mat-select-arrow {
+    border-color: transparent;
+    border-top-color: initial;
+}
+
+path[d="M10 17l5-5-5-5v10z"] {
+    color: rgb(213, 213, 213);
+}
+
+.notificationText.ng-star-inserted {
+    color: rgb(200, 200, 200);
+}
+
+.name {
+    color: rgb(220, 220, 220);
+}
+
+button.mat-focus-indicator.mat-stroked-button.mat-button-base.ng-star-inserted {
+    color: #00E1D6;
+}
+
+.active-title {
+    color: #009186;
+}
+
+span.metadata {
+    color: #009186;
+}
+
+.creditSubheader {
+    color: #009186;
+}
+
+mat-icon.icon.mat-icon.notranslate.mat-icon-no-color {
+    background-color: transparent;
+}
+
+.icon {
+    background-color: #063331;
+}
+
+.mat-list-item-content {
+    color: rgb(220, 220, 220);
+}
+
+button.mat-focus-indicator.mat-stroked-button.mat-button-base {
+    border-color: $border;
+}
+
+a.mat-list-item.gmat-nav-list-item.gmat-subtitle-2.gmat-list-item-active {
+    background-color: #1A1D1E;
+}
+
+div#mat-select-value-1 {
+    color: rgb(220, 220, 220);
+}
+
+.mat-form-field-infix {
+    padding-top: 11px;
+    border-top: initial;
+}
+
+div[ng-class="ctrl.dialpadVisible ? '' : ctrl.CSS.DIALPAD_COLLAPSED"] {
+    background-color: #131516;
+}
