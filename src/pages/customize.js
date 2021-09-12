@@ -24,9 +24,9 @@
 
     const currentStartMinimized = prefs.startMinimized || false;
     const minimizedSetting = document.getElementById("start-minimized");
-    minimizedSetting.addEventListener('blur', (e) => {
-         const val = e.target.value;
-         ipcRenderer.send('pref-change-start-minimized', val == 'true');
+    minimizedSetting.addEventListener('change', (e) => {
+         const val = e.target.checked;
+         ipcRenderer.send('pref-change-start-minimized', val);
     });
     minimizedSetting.value = currentStartMinimized;
         
