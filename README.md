@@ -5,7 +5,7 @@ I'm annoyed at the lack of desktop app for voice, like hangouts had.
 It just lets you keep voice open without a chrome browser. It will also check the dom for notifications and display a badge in the task bar and closing the app will send it to a tray instead of closing.
 
 ## Support
-Currently supports both OSX, Windows 10 & Ubuntu
+Currently supports both OSX, Windows 10 & Linux
 
 Questions? Ideas? Join us in discord https://discord.gg/3SSS6vkKET
 
@@ -17,7 +17,7 @@ Simply uzip and drag into the applications folder (mac) or run the executable (w
 **Mac Note: The mac version is unsigned, so you will have to click "Open Anyway" after running, or go to Settings > Security & Privacy > General > Open Anyway. Sorry not paying for a dev license just for this**
 
 
-**Ubuntu Note: You will have to make the AppImage executable in order to run it. Right Click > Properties > Permissions > Allow Executing file as a program**
+**Linux Note: You will have to make the AppImage executable in order to run it. Right Click > Properties > Permissions > Allow Executing file as a program**
 
 ## Themes
 New in 1.1 we now have different themes! You can change your theme by clicking on the customize menu on the left side of the page
