@@ -174,6 +174,8 @@ function loadGoogleVoiceInMainWindow() {
     win && win.loadURL('https://voice.google.com');
 }
 
+// Invoked every "REFRESH_RATE" seconds.  Parses the current notification count from Google
+// Voice's markup and then has this application display it to the user in an appropriate way.
 function updateNotifications(app) {
 
     if (!win || BrowserWindow.getAllWindows().length === 0) {
@@ -193,44 +195,68 @@ function updateNotifications(app) {
             }, 0);
         }
 
-        sendCountsToDock(app, sum);
+        processNotificationCount(app, sum);
     });
 }
 
-// Keep our doc in sync with whats in the dom
-function sendCountsToDock(app, num) {
-    if (num !== lastNotification) {
-        lastNotification = num;
-        if (process.platform === 'darwin') {
-            sendCountsToDockMac(app, num);
-        } else {
-            sendCountsToDockWindows(num)
-        }
+// Displays a specified notification count to the user (if it isn't already
+// being displayed), in a way that is appropriate for their Operating System.
+function processNotificationCount(app, count) {
+    if (count !== lastNotification) {
+        // Update our record of what the new count is.  We update our record *before* proceeding to ensure we don't
+        // enter a loop of continuously trying to update UI in the event that we experience some failure down below.
+        let oldCount = lastNotification;
+        lastNotification = count;
 
-        if (num > 0) {
+        // Perform OS-specific operations.
+        if (process.platform === 'darwin') {
+            processNotificationCount_MacOS(app, oldCount, count);
+        }
+        else if (process.platform === 'win32') {
+            processNotificationCount_Windows(app, oldCount, count);
+        }
+        
+        // Update our notification area icon based on the count.  If it's greater than 0,
+        // display the icon with a red dot, otherwise display the icon without a red dot.
+        if (count > 0) {
             tray && tray.setImage(iconTrayDirty);
-        } else {
+        }
+        else {
             tray && tray.setImage(iconTray);
         }
     }
 }
 
-function sendCountsToDockWindows(num) {
-    if (num) {
-        badgeGenerator.generate(num).then((base64) => {
-            const image = nativeImage.createFromDataURL(base64);
-            win.setOverlayIcon(image, 'You have new messages and/or calls');
-        });
-    } else {
-        win.setOverlayIcon(null, '');
-    }
+// Updates this application's UI on Windows in a way that is appropriate for a specified notification count.
+function processNotificationCount_Windows(app, oldCount, newCount) {
+    if (win) {
+        // If the specified new count is non-0, use our Badge Generator to dynamically generate an image representing it,
+        // and then apply the image as an overlay icon on our main window's Taskbar button.  Note that if the user has
+        // the "Use small Taskbar buttons" setting turned on, the overlay won't actually be rendered due to lack of space.
+        if (newCount) {
+            badgeGenerator.generate(newCount).then((base64) => {
+                const image = nativeImage.createFromDataURL(base64);
+                win.setOverlayIcon(image, 'You have new messages and/or calls');
+            });
+        } else {
+            win.setOverlayIcon(null, '');
+        }
 
+        // If the notification count has gone up and our main window isn't currently
+        // focused, also flash the window's Taskbar button to catch the user's attention.  
+        if ((newCount > oldCount) && !win.isFocused()) {
+            win.flashFrame(true);
+        }
+    }
 }
 
-function sendCountsToDockMac(app, num) {
+// Updates this application's UI on Mac OS in a way that is appropriate for a specified notification count.
+function processNotificationCount_MacOS(app, oldCount, newCount) {
+    // Overlay the specified new count on our Dock icon.  If the count has
+    // increased, also bouce the icon the catch the user's attention.
     if (app.dock) {
-        app.dock.setBadge(`${num || ''}`);
-        if (num > 0) {
+        app.dock.setBadge(`${newCount || ''}`);
+        if (newCount > oldCount) {
             app.dock.bounce();
         }
     }
