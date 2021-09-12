@@ -171,7 +171,7 @@ function createWindow() {
 // Loads Google Voice in the main application window, identifying this application as Firefox running on
 // a Mac.  During the load, Google Voice itself takes care of asking the user to log in when necessary.
 function loadGoogleVoiceInMainWindow() {
-    win && win.loadURL('https://voice.google.com', {userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:82.0) Gecko/20100101 Firefox/82.0'});
+    win && win.loadURL('https://voice.google.com');
 }
 
 function updateNotifications(app) {
