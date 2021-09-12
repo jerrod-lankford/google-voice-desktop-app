@@ -115,7 +115,7 @@ function createWindow() {
         }
     })
     win.removeMenu();
-    win.loadURL('https://voice.google.com', { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:82.0) Gecko/20100101 Firefox/82.0' });
+    loadGoogleVoiceInMainWindow();
     // win.webContents.openDevTools();
 
     win.webContents.on('did-finish-load', () => {
@@ -135,8 +135,21 @@ function createWindow() {
     badgeGenerator = new BadgeGenerator(win);
 
     win.webContents.on('new-window', function(e, url) {
-        e.preventDefault();
-        shell.openExternal(url);
+        e.preventDefault(); // Cancel the request to open the target URL in a new window
+
+        // If the target URL is a Google Voice URL, have our main window navigate to it instead of opening
+        // it in a new window.  This supports the ability to add additional accounts and switch between
+        // them on-demand.  Otherwise, for all other URLs, have the system open them using the default type
+        // handler.  This is done to force URLs to open in the user's browser, where they are likely already
+        // signed into services that need authentication (e.g. Spotify).  Note that if the user ever gets
+        // stuck navigated somewhere that isn't the main Google Voice page, they can always use the "Reload"
+        // item in the notification area icon context menu to get back to the Google Voice home page.
+        if ((url.startsWith('https://voice.google.com') || url.startsWith('https://accounts.google.com'))) {
+            win && win.loadURL(url);
+        }
+        else {
+            shell.openExternal(url);
+        }
     });
 
 	win.on('close', function (event) {
@@ -153,6 +166,12 @@ function createWindow() {
     win.on('resize', saveWindowSize);
 
     return win;
+}
+
+// Loads Google Voice in the main application window, identifying this application as Firefox running on
+// a Mac.  During the load, Google Voice itself takes care of asking the user to log in when necessary.
+function loadGoogleVoiceInMainWindow() {
+    win && win.loadURL('https://voice.google.com', {userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:82.0) Gecko/20100101 Firefox/82.0'});
 }
 
 function updateNotifications(app) {
@@ -231,6 +250,11 @@ function createTray(iconPath, tipText) {
         {
             label: 'Open', click: function () {
                 win && win.show();
+            }
+        },
+        {
+            label: 'Refresh', click: function () {
+                loadGoogleVoiceInMainWindow();
             }
         },
         {
