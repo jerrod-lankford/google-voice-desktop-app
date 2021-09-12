@@ -29,12 +29,14 @@ Not only themes but also a system for themeing! If you want to create your own t
 ## Run From Source
 `git clone git@github.com:Jerrkawz/google-voice-desktop-app.git`
 
-`npm install`
+`npm install -g yarn`
 
-`npm start`
+`yarn install`
+
+`yarn start`
 
 To build yourself you can run
-`npm run build:windows` or `npm run build:mac` or `npm run build:linux`
+`yarn run build:windows` or `yarn run build:mac` or `yarn run build:linux`
 
 ## Screenshots
 ![Windows](/screenshots/windows.png?raw=true)

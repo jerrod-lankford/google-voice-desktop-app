@@ -1,5 +1,5 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView, shell } = require('electron');
+const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView, shell, powerMonitor } = require('electron');
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
@@ -36,6 +36,12 @@ if (!app.requestSingleInstanceLock()) {
 
 app.on('second-instance', () => {
     win && win.show();
+});
+
+// If the computer is shutting down or restarting then close
+powerMonitor.on('shutdown', () => {
+    app.isQuiting = true;
+    app.quit();
 });
 
 // Setup context menu
