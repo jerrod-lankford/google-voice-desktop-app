@@ -27,3 +27,11 @@
     background-color:  rgb(224, 242, 241);
 
 }
+
+input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+}
