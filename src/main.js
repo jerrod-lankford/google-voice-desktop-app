@@ -1,5 +1,5 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView, shell, powerMonitor } = require('electron');
+const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, ipcRenderer, BrowserView, shell, powerMonitor } = require('electron');
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
@@ -65,13 +65,17 @@ ipcMain.on('show-customize', () => {
     const view = new BrowserView({
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false,
-            enableRemoteModule: true
+            contextIsolation: false
         }
     });
     win.setBrowserView(view);
     view.setBounds({ x: 0, y: 0, width: 800, height: 600 });
     view.webContents.loadFile(path.join(appPath, 'src', 'pages', 'customize.html'));
+
+    view.webContents.on('did-finish-load', () => {
+        view.webContents.send('set-preferences', store.get('prefs') || {});
+
+    });
     // view.webContents.openDevTools();
 });
 
@@ -230,7 +234,7 @@ function processNotificationCount(app, count) {
             processNotificationCount_MacOS(app, oldCount, count);
         }
         else if (process.platform === 'win32') {
-            processNotificationCount_Windows(app, oldCount, count);
+            processNotificationCount_Windows(oldCount, count);
         }
         
         // Update our notification area icon based on the count.  If it's greater than 0,
@@ -245,7 +249,7 @@ function processNotificationCount(app, count) {
 }
 
 // Updates this application's UI on Windows in a way that is appropriate for a specified notification count.
-function processNotificationCount_Windows(app, oldCount, newCount) {
+function processNotificationCount_Windows(oldCount, newCount) {
     if (win) {
         // If the specified new count is non-0, use our Badge Generator to dynamically generate an image representing it,
         // and then apply the image as an overlay icon on our main window's Taskbar button.  Note that if the user has
