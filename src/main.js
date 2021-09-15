@@ -6,6 +6,7 @@ const path = require('path');
 const ThemeInjector = require('./utils/themeInjector');
 const MenuInjector = require('./utils/menuInjector');
 const Store = require('electron-store');
+const Url = require('url');
 
 // Constants
 const store = new Store();
@@ -69,6 +70,7 @@ ipcMain.on('show-customize', () => {
         }
     });
     win.setBrowserView(view);
+    win.removeMenu();
     view.setBounds({ x: 0, y: 0, width: 800, height: 600 });
     view.webContents.loadFile(path.join(appPath, 'src', 'pages', 'customize.html'));
 
@@ -160,7 +162,8 @@ function createWindow() {
         // signed into services that need authentication (e.g. Spotify).  Note that if the user ever gets
         // stuck navigated somewhere that isn't the main Google Voice page, they can always use the "Reload"
         // item in the notification area icon context menu to get back to the Google Voice home page.
-        if ((url.startsWith('https://voice.google.com') || url.startsWith('https://accounts.google.com'))) {
+        const hostName = Url.parse(url).hostname;
+        if ( hostName === 'voice.google.com' || hostName === 'accounts.google.com') {
             win && win.loadURL(url);
         }
         else {
