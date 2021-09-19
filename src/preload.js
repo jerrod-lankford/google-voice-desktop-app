@@ -5,11 +5,11 @@
 
 (async() => {
     // Get this application's execution path.
-    const {ipcRenderer} = require("electron");
-    const appPath = await ipcRenderer.invoke("get-appPath");
+    const {ipcRenderer} = require('electron');
+    const appPath = await ipcRenderer.invoke('get-appPath');
 
     // Modify JavaScript's "Notification" class such that all notifications that get generated will have a
     // click handler attached to them which fires a "notification-clicked" event back at the main process.
-    const {notificationShim} = require("./utils/notificationShim");
+    const {notificationShim} = require('./utils/notificationShim');
     notificationShim(appPath);
 })();

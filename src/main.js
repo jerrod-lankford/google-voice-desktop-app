@@ -1,6 +1,6 @@
 // Requires
 const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, ipcRenderer, BrowserView, shell, powerMonitor } = require('electron');
-const constants = require("./constants");
+const constants = require('./constants');
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
@@ -107,7 +107,7 @@ ipcMain.on('pref-change-start-minimized', (e, startMinimized) => {
 });
 
 // Set up an IPC handler that can be used by renderer processes to retrieve the execution path of this application.
-ipcMain.handle('get-appPath', async (event, ...args) => {
+ipcMain.handle('get-appPath', () => {
     return app.getAppPath();
 });
 
