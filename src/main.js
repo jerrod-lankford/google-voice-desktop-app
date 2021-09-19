@@ -1,5 +1,6 @@
 // Requires
 const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, ipcRenderer, BrowserView, shell, powerMonitor } = require('electron');
+const constants = require("./constants");
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
@@ -12,13 +13,10 @@ const Url = require('url');
 const store = new Store();
 const appPath = app.getAppPath();
 const REFRESH_RATE = 1000; // 1 seconds
-
-const icon = path.join(appPath, 'images', '64px-Google_Voice_icon_(2020).png');
-const iconTray = path.join(appPath, 'images', 'tray-Google_Voice_icon_(2020).png');
-const iconTrayDirty = path.join(appPath, 'images', 'tray-dirty-Google_Voice_icon_(2020).png');
-const dockIcon = nativeImage.createFromPath(
-    path.join(appPath, 'images', '1024px-Google_Voice_icon_(2020).png')
-);
+const icon = path.join(appPath, 'images', constants.APPLICATION_ICON_MEDIUM);
+const iconTray = path.join(appPath, 'images', constants.APPLICATION_ICON_SMALL);
+const iconTrayDirty = path.join(appPath, 'images', constants.APPLICATION_ICON_SMALL_WITH_INDICATOR);
+const dockIcon = nativeImage.createFromPath(path.join(appPath, 'images', constants.APPLICATION_ICON_LARGE));
 const DEFAULT_WIDTH = 1200;
 const DEFAULT_HEIGHT = 900;
 
@@ -50,6 +48,13 @@ contextMenu({
     showSaveImage: true,
     showInspectElement: true
 });
+
+// If we're running on Windows, set our Application User Model ID to our application name.
+// This will be displayed in all system Toasts that get generated to display notifications
+// to the user.  If we don't do this, "electron.app.Electron" will be displayed instead.
+if (process.platform === 'win32'){
+    app.setAppUserModelId(constants.APPLICATION_NAME);
+}
 
 // Setup notification shim to focus window
 ipcMain.on('notification-clicked', () => {
@@ -101,6 +106,11 @@ ipcMain.on('pref-change-start-minimized', (e, startMinimized) => {
     store.set('prefs', prefs);
 });
 
+// Set up an IPC handler that can be used by renderer processes to retrieve the execution path of this application.
+ipcMain.handle('get-appPath', async (event, ...args) => {
+    return app.getAppPath();
+});
+
 // Show window when clicking on macosx dock icon
 app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
@@ -148,7 +158,7 @@ function createWindow() {
     if (tray) {
         tray.destroy;
     }
-    tray = createTray(iconTray, 'Google Voice Tray');
+    tray = createTray(iconTray, constants.APPLICATION_NAME);
 
     badgeGenerator = new BadgeGenerator(win);
 
