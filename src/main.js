@@ -81,7 +81,7 @@ ipcMain.on('show-customize', () => {
     view.setBounds({ x: 0, y: 0, width: 800, height: 600 });
     view.webContents.loadFile(path.join(appPath, 'src', 'pages', 'customize.html'));
 
-    // view.webContents.openDevTools();
+    view.webContents.openDevTools();
 });
 
 ipcMain.on('pref-change', (e, theme) => {
