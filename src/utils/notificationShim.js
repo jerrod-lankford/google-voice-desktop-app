@@ -15,7 +15,7 @@ module.exports.notificationShim = function(appPath) {
     Notification = function (title, options) {
         // If the specified options don't include an icon for the notification, set the icon to our application icon.
         if (!options)      { options = {}; }
-        if (!options.icon) { options.icon = path.join(appPath, 'images', constants.APPLICATION_ICON_Medium); }
+        if (!options.icon) { options.icon = path.join(appPath, 'images', constants.APPLICATION_ICON_MEDIUM); }
                 
         // Create a normal Notification instance using the specified parameters.
         const oldNotification = new OldNotification(title, options);

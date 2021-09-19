@@ -13,10 +13,10 @@ const Url = require('url');
 const store = new Store();
 const appPath = app.getAppPath();
 const REFRESH_RATE = 1000; // 1 seconds
-const icon = path.join(appPath, 'images', constants.APPLICATION_ICON_Medium);
-const iconTray = path.join(appPath, 'images', constants.APPLICATION_ICON_Small);
-const iconTrayDirty = path.join(appPath, 'images', constants.APPLICATION_ICON_SmallWithIndicator);
-const dockIcon = nativeImage.createFromPath(path.join(appPath, 'images', constants.APPLICATION_ICON_Large));
+const icon = path.join(appPath, 'images', constants.APPLICATION_ICON_MEDIUM);
+const iconTray = path.join(appPath, 'images', constants.APPLICATION_ICON_SMALL);
+const iconTrayDirty = path.join(appPath, 'images', constants.APPLICATION_ICON_SMALL_WITH_INDICATOR);
+const dockIcon = nativeImage.createFromPath(path.join(appPath, 'images', constants.APPLICATION_ICON_LARGE));
 const DEFAULT_WIDTH = 1200;
 const DEFAULT_HEIGHT = 900;
 

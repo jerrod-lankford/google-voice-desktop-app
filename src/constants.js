@@ -1,20 +1,23 @@
 /**********************************************************************************************************************
- * This module contains constants that are meant to be used throughout the entire application.  Each constant is
- * defined using the define() function which ensures that it remains read-only when this module is consumed.
+ * This module contains constants that are meant to be used throughout the entire application.
  **********************************************************************************************************************/
 
-function define(name, value) {
-    Object.defineProperty(exports, name, {
-        value:      value,
-        enumerable: true
-    });
-}
-
 // Strings
-define('APPLICATION_NAME', 'Voice Desktop'); // Application name
+const APPLICATION_NAME = 'Voice Desktop';
 
 // Images
-define('APPLICATION_ICON_Large',              '1024px-Google_Voice_icon_(2020).png');     // Application icon (large)  --sufficient size for MacOS Doc
-define('APPLICATION_ICON_Medium',             '64px-Google_Voice_icon_(2020).png');       // Application icon (medium) --sufficient size for Windows Taskbar
-define('APPLICATION_ICON_Small',              'tray-Google_Voice_icon_(2020).png');       // Application icon (small)  --sufficient size for system notification area
-define('APPLICATION_ICON_SmallWithIndicator', 'tray-dirty-Google_Voice_icon_(2020).png'); // Application icon (small, with "notifications" indicator)
+const APPLICATION_ICON_LARGE                = '1024px-Google_Voice_icon_(2020).png';
+const APPLICATION_ICON_MEDIUM               = '64px-Google_Voice_icon_(2020).png';
+const APPLICATION_ICON_SMALL                = 'tray-Google_Voice_icon_(2020).png';
+const APPLICATION_ICON_SMALL_WITH_INDICATOR = 'tray-dirty-Google_Voice_icon_(2020).png';
+
+module.exports = {
+    // Strings
+    APPLICATION_NAME, // Application name (displayed in various places)
+
+    // Images
+    APPLICATION_ICON_LARGE,               // Main application icon (large)  --sufficient size for MacOS Doc
+    APPLICATION_ICON_MEDIUM,              // Main application icon (medium) --sufficient size for Windows Taskbar
+    APPLICATION_ICON_SMALL,               // Main application icon (small)  --sufficient size for system notification area
+    APPLICATION_ICON_SMALL_WITH_INDICATOR // Main application icon (small, with "notifications" indicator)
+};
