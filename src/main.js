@@ -1,5 +1,5 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, ipcRenderer, BrowserView, shell, powerMonitor } = require('electron');
+const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView, shell, powerMonitor } = require('electron');
 const constants = require('./constants');
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
@@ -8,6 +8,7 @@ const ThemeInjector = require('./utils/themeInjector');
 const MenuInjector = require('./utils/menuInjector');
 const Store = require('electron-store');
 const Url = require('url');
+require('@electron/remote/main').initialize();
 
 // Constants
 const store = new Store();
@@ -74,15 +75,12 @@ ipcMain.on('show-customize', () => {
             contextIsolation: false
         }
     });
+    require('@electron/remote/main').enable(view.webContents);
     win.setBrowserView(view);
     win.removeMenu();
     view.setBounds({ x: 0, y: 0, width: 800, height: 600 });
     view.webContents.loadFile(path.join(appPath, 'src', 'pages', 'customize.html'));
 
-    view.webContents.on('did-finish-load', () => {
-        view.webContents.send('set-preferences', store.get('prefs') || {});
-
-    });
     // view.webContents.openDevTools();
 });
 

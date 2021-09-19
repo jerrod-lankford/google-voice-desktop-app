@@ -42,6 +42,7 @@
   "sass": "^1.32.8"
  },
  "devDependencies": {
+  "@electron/remote": "^2.0.1",
   "electron": "^14.0.0",
   "electron-builder": "^22.10.5"
  }
