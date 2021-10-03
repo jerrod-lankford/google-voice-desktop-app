@@ -13,8 +13,9 @@
                   </ul>
             </div>
             <div class="main-content">
+                <!--"Theme" dropdown-->
                 <div class="form-group">
-                    <label for="theme">Theme</label>
+                    <label for="theme" class="font-weight-bold">Theme</label>
                     <select class="form-control" id="theme">
                         <option value="default">Default</option>
                         <option value="dracula">Dracula</option>
@@ -24,13 +25,27 @@
                         <option value="darkplus">DarkPlus</option>
                     </select>
                 </div>
+                
+                <!--"Zoom" slider-->
                 <div class="form-group">
-                    <label for="zoom">Zoom (%)</label>
-                    <input class="form-control" id="zoom" value="100" />
+                    <label for="zoom"  class="font-weight-bold">Zoom % (25-500)</label>
+                    <input type="range" class="form-control" id="zoom" min="-8" max="9" step="1" />
                 </div>
+                
                 <div class="form-group">
-                    <label for="start-minimized">Start minimized to tray?</label>
+                    <label class="font-weight-bold">Options</label>
+                </div>
+                
+                <!--"Show menu bar" checkbox-->
+                <div class="form-group">
+                    <input type="checkbox" class="form-control" id="show-menubar">
+                    <label for="show-menubar">Show menu bar?</label>
+                </div>
+                
+                <!--"Start minimized" checkbox-->
+                <div class="form-group">
                     <input type="checkbox" class="form-control" id="start-minimized">
+                    <label for="start-minimized">Start minimized to tray?</label>
                 </div>
             </div>
         </div>
