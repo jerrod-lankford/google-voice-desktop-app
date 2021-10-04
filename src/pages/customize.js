@@ -4,7 +4,9 @@
 
     // Allow the user to hit the Escape key to close the window.
     window.addEventListener('keyup', (event) => {
-        window.close();
+        if (event.code === 'Escape') {
+            window.close();
+        }
     }, true);
     
     // Retrieve the user's settings store from the main process.
