@@ -48,4 +48,13 @@
         const checked = e.target.checked;
         ipcRenderer.send('pref-change-start-minimized', checked);
     });
+
+    // Set the "exit on close" checkbox based on the user's currently selected
+    // preference.  Notify the main process whenever the preference changes.
+    const exitOnCloseSetting = document.getElementById('exit-on-close');
+    exitOnCloseSetting.checked = (prefs.exitOnClose != undefined) ? prefs.exitOnClose : constants.DEFAULT_SETTING_EXIT_ON_CLOSE;
+    exitOnCloseSetting.addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        ipcRenderer.send('pref-change-exit-on-close', checked);
+    });
 })();

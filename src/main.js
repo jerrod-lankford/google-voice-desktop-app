@@ -180,10 +180,25 @@ function createWindow() {
         }
     });
 
-	win.on('close', function (event) {
-        if (!app.isQuiting) {
-            event.preventDefault();
-            win.hide();
+    // Whenever a request is made for the window to be closed, determine whether we should allow the close to
+    // happen and terminate the application, or just hide the window and keep running in the notification area.
+    win.on('close', function (event) {
+        // Proceed based on the reason why the window is being closed.
+        if (app.isQuiting) {
+            // The window is being closed as a result of us calling app.quit() due to the
+            // user's invocation of one of our "Exit" menu items.  In this case, we'll
+            // allow the close to happen.  This will lead to termination of the application.
+        }
+        else {
+            // The window is being closed as a result of the user explicitly trying to close
+            // it.  If the user has enabled the "exit on close" setting, allow the close and
+            // subsequent termination of the application to proceed.  Otherwise, cancel the
+            // close and hide the window instead; we'll keep running in the notification area.
+            const exitOnClose = store.get('prefs.exitOnClose') || constants.DEFAULT_SETTING_EXIT_ON_CLOSE;
+            if (!exitOnClose) {
+                event.preventDefault();
+                win.hide();
+            }
         }
     });
 
@@ -444,5 +459,15 @@ ipcMain.on('pref-change-start-minimized', (e, startMinimized) => {
     // Apply the new value and then save it to the user's settings store.
     const prefs = store.get('prefs') || {};
     prefs.startMinimized = startMinimized;
+    store.set('prefs', prefs);
+});
+
+// Called when the "exit on close" checkbox has been checked/unchecked.
+ipcMain.on('pref-change-exit-on-close', (e, exitOnClose) => {
+    console.log(`"Exit on close" changed to: ${exitOnClose}`);
+    
+    // Apply the new value and then save it to the user's settings store.
+    const prefs = store.get('prefs') || {};
+    prefs.exitOnClose = exitOnClose;
     store.set('prefs', prefs);
 });
