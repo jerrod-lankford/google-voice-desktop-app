@@ -5,13 +5,6 @@
     </head>
     <body>
         <div class="main-container">
-            <div class="main-nav">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#">Display</a>
-                    </li>
-                  </ul>
-            </div>
             <div class="main-content">
                 <!--"Theme" dropdown-->
                 <div class="form-group">
@@ -25,33 +18,41 @@
                         <option value="darkplus">DarkPlus</option>
                     </select>
                 </div>
-                
+
                 <!--"Zoom" slider-->
                 <div class="form-group">
-                    <label for="zoom"  class="font-weight-bold">Zoom % (25-500)</label>
-                    <input type="range" class="form-control" id="zoom" min="-8" max="9" step="1" />
-                </div>
-                
-                <div class="form-group">
-                    <label class="font-weight-bold">Options</label>
-                </div>
-                
-                <!--"Show menu bar" checkbox-->
-                <div class="form-group">
-                    <input type="checkbox" class="form-control" id="show-menubar">
-                    <label for="show-menubar">Show menu bar</label>
-                </div>
-                
-                <!--"Start minimized" checkbox-->
-                <div class="form-group">
-                    <input type="checkbox" class="form-control" id="start-minimized">
-                    <label for="start-minimized">Start minimized to tray</label>
+                    <label class="font-weight-bold" style="margin-bottom: 0">Zoom % (25-500)</label>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="range" class="form-control" id="zoom" min="-8" max="9" step="1" />
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-secondary" id="reset-zoom">Reset</button>
+                        </div>
+                    </div>
                 </div>
 
-                <!--"Exit on close" checkbox-->
+                <!--Options-->
                 <div class="form-group">
-                    <input type="checkbox" class="form-control" id="exit-on-close">
-                    <label for="exit-on-close">Exit application when main window is closed</label>
+                    <label class="font-weight-bold">Options</label>
+                    
+                    <!--"Show menu bar" checkbox-->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="show-menubar">
+                        <label class="form-check-label" for="show-menubar">Show menu bar</label>
+                    </div>
+
+                    <!--"Start minimized" checkbox-->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="start-minimized">
+                        <label class="form-check-label" for="start-minimized">Start minimized to tray</label>
+                    </div>
+                    
+                    <!--"Exit on close" checkbox-->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="exit-on-close">
+                        <label class="form-check-label" for="exit-on-close">Exit application when main window is closed</label>
+                    </div>
                 </div>
             </div>
         </div>

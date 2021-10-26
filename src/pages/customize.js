@@ -30,6 +30,14 @@
         const zoomLevel = e.target.value;
         ipcRenderer.send('pref-change-zoom', zoomLevel);
     });
+
+    // Whenever the user clicks the "reset zoom" button, set the "zoom"
+    // slider back to 0 and notify the main process of this new value.
+    const zoomResetButton = document.getElementById('reset-zoom');
+    zoomResetButton.addEventListener('click', (e) => {
+        zoomSlider.value = 0;
+        ipcRenderer.send('pref-change-zoom', 0);
+    });
     
     // Set the "show menu bar" checkbox based on the user's currently selected preference.
     // Notify the main process whenever the user changes their preference.
