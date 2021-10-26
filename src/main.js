@@ -97,18 +97,18 @@ function createWindow() {
     // Create the window's menu bar.
     win.setMenu(Menu.buildFromTemplate([
         {
-            label: removeAmpersandForMac('&File'),
+            label: '&File',
             submenu: [
-                {label: removeAmpersandForMac('&Reload'),        click: () => {loadGoogleVoice();}},     // Reload Google Voice within our main window
-                {label: removeAmpersandForMac('Go to &website'), click: () => {loadGoogleVoice(true);}}, // Open Google Voice externally in the user's browser
-                {type: 'separator'},
-                {label: removeAmpersandForMac('&Settings'),      click: () => {showSettingsWindow()}},   // Open/display our Settings window
-                {type: 'separator'},
-                {label: removeAmpersandForMac('&Exit'),          click: () => {exitApplication();}}      // Exit the application
+                {label: '&Reload',        click: () => {loadGoogleVoice();}},     // Reload Google Voice within our main window
+                {label: 'Go to &website', click: () => {loadGoogleVoice(true);}}, // Open Google Voice externally in the user's browser
+                {type:  'separator'},
+                {label: '&Settings',      click: () => {showSettingsWindow()}},   // Open/display our Settings window
+                {type:  'separator'},
+                {label: '&Exit',          click: () => {exitApplication();}}      // Exit the application
             ]
         },
         {
-            label: removeAmpersandForMac('&View'),
+            label: '&View',
             submenu: [
                 {role:  'zoomIn', visible: false},                                           // Zoom in (Ctrl+Shift++)
                 {role:  'zoomIn', accelerator: 'CommandOrControl+='},                        // Zoom in (Ctrl+=)
@@ -118,21 +118,21 @@ function createWindow() {
                 {type:  'separator'},
                 {role:  'toggleFullScreen'},                                                 // Toggle full screen (F11)
                 {type:  'separator'},
-                {label: removeAmpersandForMac('&Hide menu bar'), click: () => {win.setMenuBarVisibility(false);}} // Hide the menu bar
+                {label: '&Hide menu bar', click: () => {win.setMenuBarVisibility(false);}} // Hide the menu bar
             ]
         },
         {
-            label: removeAmpersandForMac('&Help'),
+            label: '&Help',
             submenu: [
-                {label: removeAmpersandForMac('Report a &bug'),                 click: () => {shell.openExternal(constants.URL_GITHUB_REPORT_BUG);}},
-                {label: removeAmpersandForMac('Request a &feature'),            click: () => {shell.openExternal(constants.URL_GITHUB_FEATURE_REQUEST);}},
-                {label: removeAmpersandForMac('Ask a &question'),               click: () => {shell.openExternal(constants.URL_GITHUB_ASK_QUESTION);}},
-                {label: removeAmpersandForMac('View &issues'),                  click: () => {shell.openExternal(constants.URL_GITHUB_VIEW_ISSUES);}},
+                {label: 'Report a &bug',                 click: () => {shell.openExternal(constants.URL_GITHUB_REPORT_BUG);}},
+                {label: 'Request a &feature',            click: () => {shell.openExternal(constants.URL_GITHUB_FEATURE_REQUEST);}},
+                {label: 'Ask a &question',               click: () => {shell.openExternal(constants.URL_GITHUB_ASK_QUESTION);}},
+                {label: 'View &issues',                  click: () => {shell.openExternal(constants.URL_GITHUB_VIEW_ISSUES);}},
                 {type: 'separator'},
-                {label: removeAmpersandForMac('&Security Policy'),              click: () => {shell.openExternal(constants.URL_GITHUB_SECURITY_POLICY);}},
+                {label: '&Security Policy',              click: () => {shell.openExternal(constants.URL_GITHUB_SECURITY_POLICY);}},
                 {type: 'separator'},
-                {label: removeAmpersandForMac('View &releases'),                click: () => {shell.openExternal(constants.URL_GITHUB_RELEASES);}},
-                {label: removeAmpersandForMac(`&About (v${app.getVersion()})`), click: () => {shell.openExternal(constants.URL_GITHUB_README);}}
+                {label: 'View &releases',                click: () => {shell.openExternal(constants.URL_GITHUB_RELEASES);}},
+                {label: `&About (v${app.getVersion()})`, click: () => {shell.openExternal(constants.URL_GITHUB_README);}}
             ]
         }
     ]));
@@ -326,12 +326,12 @@ function createTray(iconPath, tipText) {
 
     // Construct the icon's context menu.  This is done using an array of MenuItem objects.
     appIcon.setContextMenu(Menu.buildFromTemplate([
-        {label: removeAmpersandForMac('&Open'),     click: () => {showMainWindow();}},
-        {label: removeAmpersandForMac('&Reload'),   click: () => {loadGoogleVoice();}},
+        {label: '&Open',     click: () => {showMainWindow();}},
+        {label: '&Reload',   click: () => {loadGoogleVoice();}},
         {type:  'separator'},
-        {label: removeAmpersandForMac('&Settings'), click: () => {showSettingsWindow();}},
+        {label: '&Settings', click: () => {showSettingsWindow();}},
         {type:  'separator'},
-        {label: removeAmpersandForMac('&Exit'),     click: () => {exitApplication();}}
+        {label: '&Exit',     click: () => {exitApplication();}}
     ]));
 
     appIcon.on('click', function (event) {
@@ -388,13 +388,6 @@ function saveWindowSize() {
     prefs.windowHeight = bounds.height;
 
     store.set('prefs', prefs);
-}
-
-// Helper function for removing ampersand (&) characters from menu item labels
-// on Mac OS.  On Windows and Linux, the ampersand indicates that the character
-// following it should appear underlined and be used as a keyboard accelerator.
-function removeAmpersandForMac(label) {
-    return (process.platform === 'darwin') ? label.replaceAll('&', '') : label;
 }
 
 // ====================================================================================================================
