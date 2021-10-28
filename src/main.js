@@ -349,14 +349,16 @@ function showMainWindow() {
 // Creates (if it doesn't already exist) this application's "Settings" window, and then displays it to the user.
 function showSettingsWindow() {
     if (!settingsWindow) {
-        // Create our Settings window, keeping a global reference to.  This reference allows us
-        // to know when the window is open, preventing the user from opening it a second time.
+        // Create our Settings window, keeping a global reference to it.  This reference allows
+        // us to know when the window is open, preventing the user from opening it a second time.
         settingsWindow = new BrowserWindow({
-            width: 800,
+            width: 600,
             height: 600,
             title: 'Settings',
             parent: win,
             modal: true,
+            resizable: false,
+            minimizable: false,
             webPreferences: {
                 nodeIntegration: true,
                 contextIsolation: false

@@ -65,4 +65,10 @@
         const checked = e.target.checked;
         ipcRenderer.send('pref-change-exit-on-close', checked);
     });
+
+    // Close the window if the user clicks the "Close" button.
+    const closeButton = document.getElementById('close-button');
+    closeButton.addEventListener('click', (e) => {
+        window.close();
+    });
 })();

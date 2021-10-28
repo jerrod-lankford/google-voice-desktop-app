@@ -1,37 +1,32 @@
-.main-container {
-    height: 100%;
-    display: flex;
+/***************************************************************************************************
+  We use a CSS Grid to lay out the controls in the Settings window.  The grid consists of a single
+  column and two rows.  The second row is meant to contain a single row of any and all buttons that
+  the window needs to have (e.g. "Close").  As such, this row is assigned a height of "min-content" so
+  that it is only ever as tall as it needs to be to fit the buttons placed inside it.  The first row
+  is then given a height of "auto", so that it takes up the remainder of the window's vertical space.
+  -------------------------------------
+  | <setting control>                 |
+  | <setting control>                 |
+  | <setting control>                 |
+  | ...                               |
+  |                                   |
+  |-----------------------------------|
+  |                           [Close] |
+  -------------------------------------
+***************************************************************************************************/
+.dialog-grid {
+    display:               grid;
+    grid-template-rows:    auto min-content;
+    grid-template-columns: auto;
+    height:                100vh;
+    padding:               20px;
 }
 
-.main-nav {
-    height: 100%;
-    margin-right: 10px;
-    flex-shrink: 1;
-}
-
-.main-content  {
-    margin: 20px;
-    flex-grow: 1;
-}
-
-.nav-link {
-    color: #00796b;
-    border-radius: 0 24px 24px 0
-}
-
-.nav-link:hover {
-    color: #00796b;
-}
-
-.nav-link.active {
-    background-color:  rgb(224, 242, 241);
-
-}
-
+/*Give checkboxes a slightly larger size that normal.*/
 input[type=checkbox] {
-    width: 20px;
-    height: 20px;
-    display: inline-block;
+    width:    20px;
+    height:   20px;
+    display:  inline-block;
     position: relative;
-    top: 5px;
+    top:      5px;
 }

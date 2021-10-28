@@ -4,8 +4,9 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     </head>
     <body>
-        <div class="main-container">
-            <div class="main-content">
+        <div class="dialog-grid">
+            <!--Place setting controls in this div.-->
+            <div id="first-row">
                 <!--"Theme" dropdown-->
                 <div class="form-group">
                     <label for="theme" class="font-weight-bold">Theme</label>
@@ -54,6 +55,12 @@
                         <label class="form-check-label" for="exit-on-close">Exit application when main window is closed</label>
                     </div>
                 </div>
+            </div>
+            
+            <!--Place window buttons in this div.-->
+            <div id="second-row">
+                <!--"Close" button-->
+                <button type="button" class="btn btn-primary" id="close-button" style="float: right">Close</button>
             </div>
         </div>
         <script src="customize.js" type="text/javascript"></script>
