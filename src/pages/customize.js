@@ -11,7 +11,6 @@
     
     // Retrieve the user's settings store from the main process.
     const prefs = await ipcRenderer.invoke('get-user-prefs');
-    console.log(prefs);
 
     // Populate the "theme" dropdown with the user's currently selected theme.
     // Notify the main process whenever the user selects a different theme.
