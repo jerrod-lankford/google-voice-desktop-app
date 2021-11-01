@@ -50,7 +50,7 @@ contextMenu({
 // If we're running on Windows, set our Application User Model ID to our application name.
 // This will be displayed in all system Toasts that get generated to display notifications
 // to the user.  If we don't do this, "electron.app.Electron" will be displayed instead.
-if (process.platform === 'win32'){
+if (isWindows()){
     app.setAppUserModelId(constants.APPLICATION_NAME);
 }
 
@@ -95,7 +95,7 @@ function createWindow() {
     //win.webContents.openDevTools();
 
     // Create the window's menu bar.
-    win.setMenu(Menu.buildFromTemplate([
+    let menuBar = Menu.buildFromTemplate([
         {
             label: '&File',
             submenu: [
@@ -118,7 +118,7 @@ function createWindow() {
                 {type:  'separator'},
                 {role:  'toggleFullScreen'},                                                 // Toggle full screen (F11)
                 {type:  'separator'},
-                {label: '&Hide menu bar', click: () => {win.setMenuBarVisibility(false);}} // Hide the menu bar
+                {label: '&Hide menu bar', visible: !isMac(), click: () => {win.setMenuBarVisibility(false);}} // Hide the menu bar (not supported for Mac)
             ]
         },
         {
@@ -135,12 +135,20 @@ function createWindow() {
                 {label: `&About (v${app.getVersion()})`, click: () => {shell.openExternal(constants.URL_GITHUB_README);}}
             ]
         }
-    ]));
+    ]);
 
-    // Set the menu bar's visibility, hiding it if the user has asked us to.  When hiding
-    // it, note that shortcuts will continue to work, which is what we want to happen.
-    if (((prefs.showMenuBar != undefined) && !prefs.showMenuBar) || !constants.DEFAULT_SETTING_SHOW_MENU_BAR) {
-        win.setMenuBarVisibility(false);
+    // Set the menu bar's visibility.
+    if (isMac()) {
+        Menu.setApplicationMenu(menuBar) // On Mac, we always show the menu bar
+    }
+    else {
+        // On Windows/Linux, we give the user a setting for hiding the menu bar.  Add the menu bar to
+        // the window (which ensures that its keyboard shortcuts will work regardless of the menu bar's
+        // visibility), but make the menu bar visible only if the user hasn't asked us to hide it.
+        win.setMenu(menuBar);
+        if (((prefs.showMenuBar != undefined) && !prefs.showMenuBar) || !constants.DEFAULT_SETTING_SHOW_MENU_BAR) {
+            win.setMenuBarVisibility(false);
+        }
     }
 
     // Navigate the window to Google Voice.  When it finishes loading, modify Google's markup as needed
@@ -265,10 +273,10 @@ function processNotificationCount(app, count) {
         lastNotification = count;
 
         // Perform OS-specific operations.
-        if (process.platform === 'darwin') {
+        if (isMac()) {
             processNotificationCount_MacOS(app, oldCount, count);
         }
-        else if (process.platform === 'win32') {
+        else if (isWindows()) {
             processNotificationCount_Windows(oldCount, count);
         }
         
@@ -393,12 +401,24 @@ function saveWindowSize() {
 }
 
 // ====================================================================================================================
+// Helper Functions
+// ====================================================================================================================
+
+function isMac()     {return (process.platform === 'darwin');}
+function isWindows() {return (process.platform === 'win32');}
+
+// ====================================================================================================================
 // Invokable IPC Handlers
 // ====================================================================================================================
 
 // Returns the execution path of this application.
 ipcMain.handle('get-appPath', () => {
     return app.getAppPath();
+});
+
+// Returns the platform that this application is running on.
+ipcMain.handle('get-platform', () => {
+    return process.platform;
 });
 
 // Returns an object representing the user's current settings store.

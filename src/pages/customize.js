@@ -39,14 +39,22 @@
     });
     
     // Set the "show menu bar" checkbox based on the user's currently selected preference.
-    // Notify the main process whenever the user changes their preference.
-    const menubarSetting = document.getElementById('show-menubar');
-    menubarSetting.checked = (prefs.showMenuBar != undefined) ? prefs.showMenuBar : constants.DEFAULT_SETTING_SHOW_MENU_BAR;
-    menubarSetting.addEventListener('change', (e) => {
-        const checked = e.target.checked;
-        ipcRenderer.send('pref-change-show-menubar', checked);
-    });
-    
+    // Notify the main process whenever the user changes their preference.  If we're running
+    // on Mac, just hide this setting instead since we don't support it for that platform.
+    const menubarSettingDiv = document.getElementById('show-menubar-div');
+    const isMac = (await ipcRenderer.invoke('get-platform')) === "darwin";
+    if (isMac) {
+        menubarSettingDiv.remove();
+    }
+    else {
+        const menubarSetting = document.getElementById('show-menubar');
+        menubarSetting.checked = (prefs.showMenuBar != undefined) ? prefs.showMenuBar : constants.DEFAULT_SETTING_SHOW_MENU_BAR;
+        menubarSetting.addEventListener('change', (e) => {
+            const checked = e.target.checked;
+            ipcRenderer.send('pref-change-show-menubar', checked);
+        });
+    }
+
     // Set the "start minimized" checkbox based on the user's currently selected
     // startup mode.  Notify the main process whenever the user changes the mode.
     const minimizedSetting = document.getElementById('start-minimized');
