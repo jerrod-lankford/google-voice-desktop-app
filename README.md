@@ -19,6 +19,14 @@ Simply uzip and drag into the applications folder (mac) or run the executable (w
 
 **Linux Note: You will have to make the AppImage executable in order to run it. Right Click > Properties > Permissions > Allow Executing file as a program**
 
+## Customize
+You can change settings, apply themes and other things in the customization page. Go to `Electron > Settings` on Mac in the global menu bar, or `File > Settings` on windows.
+
+![Windows Settings](/screenshots/windowsSettings.png?raw=true)
+
+
+![Mac Settings](/screenshots/macSettings.png?raw=true)
+
 ## Themes
 The latest version now supports custom themes, which can be set in the Settings dialog.
 
