@@ -4,17 +4,12 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     </head>
     <body>
-        <div class="main-container">
-            <div class="main-nav">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                      <a class="nav-link active" href="#">Display</a>
-                    </li>
-                  </ul>
-            </div>
-            <div class="main-content">
+        <div class="dialog-grid">
+            <!--Place setting controls in this div.-->
+            <div id="first-row">
+                <!--"Theme" dropdown-->
                 <div class="form-group">
-                    <label for="theme">Theme</label>
+                    <label for="theme" class="font-weight-bold">Theme</label>
                     <select class="form-control" id="theme">
                         <option value="default">Default</option>
                         <option value="dracula">Dracula</option>
@@ -24,14 +19,48 @@
                         <option value="darkplus">DarkPlus</option>
                     </select>
                 </div>
+
+                <!--"Zoom" slider-->
                 <div class="form-group">
-                    <label for="zoom">Zoom (%)</label>
-                    <input class="form-control" id="zoom" value="100" />
+                    <label class="font-weight-bold" style="margin-bottom: 0">Zoom % (25-500)</label>
+                    <div class="form-row">
+                        <div class="col">
+                            <input type="range" class="form-control" id="zoom" min="-8" max="9" step="1" />
+                        </div>
+                        <div class="col-auto">
+                            <button type="button" class="btn btn-secondary" id="reset-zoom">Reset</button>
+                        </div>
+                    </div>
                 </div>
+
+                <!--Options-->
                 <div class="form-group">
-                    <label for="start-minimized">Start minimized to tray?</label>
-                    <input type="checkbox" class="form-control" id="start-minimized">
+                    <label class="font-weight-bold">Options</label>
+                    
+                    <!--"Show menu bar" checkbox (Windows/Linux only, will get hidden for Mac)-->
+                    <div class="form-check" id="show-menubar-div">
+                        <input class="form-check-input" type="checkbox" id="show-menubar">
+                        <label class="form-check-label" for="show-menubar">Show menu bar</label>
+                    </div>
+
+                    <!--"Start minimized" checkbox-->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="start-minimized">
+                        <label class="form-check-label" for="start-minimized">Start minimized to tray</label>
+                    </div>
+                    
+                    <!--"Exit on close" checkbox-->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="exit-on-close">
+                        <label class="form-check-label" for="exit-on-close">Exit application when main window is closed</label>
+                    </div>
                 </div>
+            </div>
+            
+            <!--Place window buttons in this div.-->
+            <div id="second-row">
+                <!--"Close" button-->
+                <button type="button" class="btn btn-primary" id="close-button" style="float: right">Close</button>
             </div>
         </div>
         <script src="customize.js" type="text/javascript"></script>
