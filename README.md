@@ -22,7 +22,7 @@ Simply uzip and drag into the applications folder (mac) or run the executable (w
 ## Customize
 You can change settings, apply themes and other things in the customization page. Go to `Electron > Settings` on Mac in the global menu bar, or `File > Settings` on windows. If you've hidden the menu bar you can also access the settings from the system tray.
 
-**Windows Settings:**
+**Windows Settings**
 
 ![Windows Settings](/screenshots/windowsSettings.png?raw=true)
 
