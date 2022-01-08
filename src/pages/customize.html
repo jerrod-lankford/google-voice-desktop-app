@@ -36,19 +36,25 @@
                 <!--Options-->
                 <div class="form-group">
                     <label class="font-weight-bold">Options</label>
-                    
+
                     <!--"Show menu bar" checkbox (Windows/Linux only, will get hidden for Mac)-->
                     <div class="form-check" id="show-menubar-div">
                         <input class="form-check-input" type="checkbox" id="show-menubar">
                         <label class="form-check-label" for="show-menubar">Show menu bar</label>
                     </div>
 
+                    <!--"Start automatically" checkbox-->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="start-automatically">
+                        <label class="form-check-label" for="start-automatically">Start application automatically at logon</label>
+                    </div>
+
                     <!--"Start minimized" checkbox-->
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="start-minimized">
-                        <label class="form-check-label" for="start-minimized">Start minimized to tray</label>
+                        <label class="form-check-label" for="start-minimized">Start application minimized to tray</label>
                     </div>
-                    
+
                     <!--"Exit on close" checkbox-->
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="exit-on-close">
@@ -56,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!--Place window buttons in this div.-->
             <div id="second-row">
                 <!--"Close" button-->

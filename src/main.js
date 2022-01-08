@@ -1,6 +1,7 @@
 // Requires
 const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView, shell, powerMonitor } = require('electron');
 const constants = require('./constants');
+const AutoLaunch = require('auto-launch')
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
@@ -11,7 +12,7 @@ const Url = require('url');
 // Constants
 const store = new Store();
 const appPath = app.getAppPath();
-const REFRESH_RATE = 1000; // 1 seconds
+const REFRESH_RATE = 3000; // 3 seconds
 const icon = path.join(appPath, 'images', constants.APPLICATION_ICON_MEDIUM);
 const iconTray = path.join(appPath, 'images', constants.APPLICATION_ICON_SMALL);
 const iconTrayDirty = path.join(appPath, 'images', constants.APPLICATION_ICON_SMALL_WITH_INDICATOR);
@@ -79,12 +80,14 @@ app.whenReady().then(createWindow);
 
 // Creates and returns this application's main BrowserWindow, navigated to Google Voice.
 function createWindow() {
-    // Create the window.  If we have it on record, re-apply the window size last set by the user.
+    // Create the window, making it hidden initially.  If we have
+    // it on record, re-apply the window size last set by the user.
     const prefs = store.get('prefs') || {};
     win = new BrowserWindow({
         width: prefs.windowWidth || DEFAULT_WIDTH,
         height: prefs.windowHeight || DEFAULT_HEIGHT,
         icon,
+        show: false,
         webPreferences: {
             spellcheck: true,
             preload: path.join(__dirname, 'preload.js'),
@@ -216,9 +219,10 @@ function createWindow() {
 
     win.on('resize', saveWindowSize);
 
-    // Hide if startMinimized is true in prefs
-    if (prefs.startMinimized) {
-        win.hide();
+    // Now that we've finished creating and initializing the window, show
+    // it (unless the user has enabled the "start minimized" setting).
+    if (!prefs.startMinimized) {
+        win.show();
     }
 
     return win;
@@ -241,6 +245,7 @@ function loadGoogleVoice(loadExternal=false) {
 
 // Invoked every "REFRESH_RATE" seconds.  Parses the current notification count from Google
 // Voice's markup and then has this application display it to the user in an appropriate way.
+// Also implements a workaround for Electron's "blank white screen" bug that many users encounter.
 function updateNotifications(app) {
     if (!win || BrowserWindow.getAllWindows().length === 0) {
         return;
@@ -261,6 +266,24 @@ function updateNotifications(app) {
 
         processNotificationCount(app, sum);
     });
+
+    // The following is a workaround for the Electron bug where after an indeterminate
+    // period of inactivity, the main application window turns into a blank white screen.
+    // When this happens, inspection shows that the loaded page consists of the following
+    // empty HTML markup:
+    //
+    //     <html><head></head><body></body></html>
+    //
+    // As such, we perform a simple check as to whether the <body/> of our loaded page
+    // has become empty.  If it has, then we automatically reload Google Voice for the
+    // user.  This seems to eliminate the problem entirely, without any adverse effects,
+    // as once we detect an empty body, the application is already in a non-working state.
+    win.webContents.executeJavaScript("document.getElementsByTagName('body')[0].innerText.trim()").then(
+        (result) => {
+            if (result == ''){
+                loadGoogleVoice();
+            }
+        })
 }
 
 // Displays a specified notification count to the user (if it isn't already
@@ -412,18 +435,24 @@ function isWindows() {return (process.platform === 'win32');}
 // ====================================================================================================================
 
 // Returns the execution path of this application.
-ipcMain.handle('get-appPath', () => {
+ipcMain.handle('get-appPath', (event) => {
     return app.getAppPath();
 });
 
 // Returns the platform that this application is running on.
-ipcMain.handle('get-platform', () => {
+ipcMain.handle('get-platform', (event) => {
     return process.platform;
 });
 
 // Returns an object representing the user's current settings store.
 ipcMain.handle('get-user-prefs', (event) => {
     return store.get('prefs') || {};
+});
+
+// Returns a bool indicating whether this application is registered to start automatically at logon.
+ipcMain.handle('get-start-automatically', async (event) => {
+    let autoLaunch = new AutoLaunch({name: constants.APPLICATION_NAME, path: app.getPath('exe')})
+    return await autoLaunch.isEnabled();
 });
 
 // Returns the current zoom level of this this application's main window.
@@ -465,6 +494,20 @@ ipcMain.on('pref-change-show-menubar', (e, showMenuBar) => {
     const prefs = store.get('prefs') || {};
     prefs.showMenuBar = showMenuBar;
     store.set('prefs', prefs);
+});
+
+// Called when the "start automatically" checkbox has been checked/unchecked.
+ipcMain.on('pref-change-start-automatically', (e, startAutomatically) => {
+    console.log(`"Start Automatically" changed to: ${startAutomatically}`);
+
+    // Register/unregister this application to be automatically started at logon.
+    let autoLaunch = new AutoLaunch({name: constants.APPLICATION_NAME, path: app.getPath('exe')})
+    if (startAutomatically) {
+        autoLaunch.enable();
+    }
+    else {
+        autoLaunch.disable();
+    }
 });
 
 // Called when the "start minimized" checkbox has been checked/unchecked.

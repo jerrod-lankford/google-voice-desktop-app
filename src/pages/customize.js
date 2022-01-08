@@ -55,6 +55,15 @@
         });
     }
 
+    // Set the "start automatically" checkbox based on the user's currently selected
+    // preference.  Notify the main process whenever the preference changes.
+    const startAutomatically = document.getElementById('start-automatically');
+    startAutomatically.checked = await ipcRenderer.invoke('get-start-automatically');
+    startAutomatically.addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        ipcRenderer.send('pref-change-start-automatically', checked);
+    });
+
     // Set the "start minimized" checkbox based on the user's currently selected
     // startup mode.  Notify the main process whenever the user changes the mode.
     const minimizedSetting = document.getElementById('start-minimized');
