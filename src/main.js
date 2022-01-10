@@ -278,9 +278,9 @@ function updateNotifications(app) {
     // has become empty.  If it has, then we automatically reload Google Voice for the
     // user.  This seems to eliminate the problem entirely, without any adverse effects,
     // as once we detect an empty body, the application is already in a non-working state.
-    win.webContents.executeJavaScript("document.getElementsByTagName('body')[0].innerText.trim()").then(
+    win.webContents.executeJavaScript("document.querySelector('body').childNodes.length").then(
         (result) => {
-            if (result == ''){
+            if (result === 0){
                 loadGoogleVoice();
             }
         })
