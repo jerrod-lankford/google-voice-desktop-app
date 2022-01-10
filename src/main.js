@@ -435,28 +435,28 @@ function isWindows() {return (process.platform === 'win32');}
 // ====================================================================================================================
 
 // Returns the execution path of this application.
-ipcMain.handle('get-appPath', (event) => {
+ipcMain.handle('get-appPath', () => {
     return app.getAppPath();
 });
 
 // Returns the platform that this application is running on.
-ipcMain.handle('get-platform', (event) => {
+ipcMain.handle('get-platform', () => {
     return process.platform;
 });
 
 // Returns an object representing the user's current settings store.
-ipcMain.handle('get-user-prefs', (event) => {
+ipcMain.handle('get-user-prefs', () => {
     return store.get('prefs') || {};
 });
 
 // Returns a bool indicating whether this application is registered to start automatically at logon.
-ipcMain.handle('get-start-automatically', async (event) => {
+ipcMain.handle('get-start-automatically', async () => {
     let autoLaunch = new AutoLaunch({name: constants.APPLICATION_NAME, path: app.getPath('exe')})
     return await autoLaunch.isEnabled();
 });
 
 // Returns the current zoom level of this this application's main window.
-ipcMain.handle('get-zoom-level', (event) => {
+ipcMain.handle('get-zoom-level', () => {
     return win.webContents.getZoomLevel();
 });
 
