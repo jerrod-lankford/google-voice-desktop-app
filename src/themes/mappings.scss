@@ -71,7 +71,7 @@ gv-message-item [layout-align='start end'] [gv-test-id='bubble'] {
     @extend %conversation-message-sent;
 }
 
-[gv-test-id='sms-sender-time-stamp'] > span {
+[gv-test-id='sms-sender-time-stamp'] {
     @extend %conversation-timestamp;
 }
 
@@ -91,7 +91,8 @@ gv-thread-item > div,
 gv-recipient-picker md-content, // Recipient picker wrapper
 gv-recipient-picker > div, // Select recipient picker on new call screen
 gv-call-as-banner, // Call as banner on phone number right panel
-gv-make-call-panel > div > div:nth-child(2), // Call panel enter a name or number
+gv-thread > div, // Item in the phone call list
+gv-make-call-panel-ng2 > div > div:nth-child(2), // Call panel enter a name or number
 gv-contact-item > div,
 gv-contact-card,
 gv-frequent-contact-card {
@@ -107,11 +108,11 @@ gv-contact-list .gmat-overline,
 .gmat-subhead-2, // send new message text
 gv-recipient-picker md-content, // recipient picker wrapper
 gv-recipient-picker md-content md-input-container label, // recipient picker placeholder label
-gv-call-as-banner .phone-number-details .phone-number-name, // Call as banner phone number name
-gv-call-as-banner .phone-number-details .phone-number, // Call as banner phone number
-gv-make-call-panel .layout-align-start-center md-input-container,
-gv-frequent-contact-card .gmat-body-2 div:first-child,
-gv-contact-item .gmat-body-2 gv-annotation, // All contacts heading on right
+gv-call-as-banner .call-as-label, // Call as banner label
+gv-call-as-banner .phone-number-details, // Call as banner phone number
+gv-make-call-panel-ng2 > div > div,
+gv-frequent-contact-card > button > div > div:first-child span, // frequent contact name
+gv-contact-item  div gv-annotation, // All contacts heading on right
 gv-contact-card .gmat-body-2 div:first-child div:nth-child(2), // Contact card name after clicking on someones name in the search bar
 gv-recent-search-item gv-annotation,
 gv-call-log-item .primaryText {
@@ -120,9 +121,9 @@ gv-call-log-item .primaryText {
 
 gv-thread-item-detail :first-child,
 gv-call-log-item .secondaryText,
-gv-frequent-contact-card .gmat-body-2 > div > span,
+gv-frequent-contact-card > button > div > div:nth-child(2) span, // frequent contact phone number
 gv-contact-card .gmat-body-2 > div > div:nth-child(3), // Contact card phone number after clicking on someones name in the search bar
-gv-contact-item > div > div > div:nth-child(2) { // Phone number under all contacts on right
+gv-contact-item > button > div > div:nth-child(2) { // Phone number under all contacts on right
     @extend %list-item-detail;
 }
 

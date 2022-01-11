@@ -32,7 +32,7 @@ gv-thread-item-detail :first-child {
     color: #999999;
 }
 
-gv-message-item [layout-align="start start"] [gv-test-id="bubble"], gv-message-item [layout-align="start end"] [gv-test-id="bubble"] {
+%conversation {
     background-color: transparent;
     border-color: #505050;
 }
