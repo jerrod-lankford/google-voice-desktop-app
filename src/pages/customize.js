@@ -82,6 +82,15 @@
         ipcRenderer.send('pref-change-exit-on-close', checked);
     });
 
+    // Set the "hide dialer sidebar" checkbox based on the user's currently selected
+    // preference.  Notify the main process whenever the preference changes.
+    const hideDialerSidebar = document.getElementById('hide-dialer-sidebar');
+    hideDialerSidebar.checked = (prefs.hideDialerSidebar != undefined) ? prefs.hideDialerSidebar : constants.DEFAULT_HIDE_DIALER_SIDEBAR;
+    hideDialerSidebar.addEventListener('change', (e) => {
+        const checked = e.target.checked;
+        ipcRenderer.send('pref-change-hide-dialer-sidebar', checked);
+    });
+
     // Close the window if the user clicks the "Close" button.
     const closeButton = document.getElementById('close-button');
     closeButton.addEventListener('click', (e) => {

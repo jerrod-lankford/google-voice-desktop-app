@@ -5,7 +5,7 @@ const AutoLaunch = require('auto-launch')
 const contextMenu = require('electron-context-menu');
 const BadgeGenerator = require('./badge_generator');
 const path = require('path');
-const ThemeInjector = require('./utils/themeInjector');
+const CSSInjector = require('./utils/cssInjector');
 const Store = require('electron-store');
 const Url = require('url');
 
@@ -23,7 +23,7 @@ const DEFAULT_HEIGHT = 900;
 // Globals
 let lastNotification = 0;
 let badgeGenerator;
-let themeInjector;
+let cssInjector;
 let tray;
 let win;            // The main application window
 let settingsWindow; // When not null, the "Settings" window, which is currently open
@@ -172,8 +172,10 @@ function createWindow() {
     win.webContents.on('did-finish-load', () => {
         // Re-apply the theme last selected by the user.
         const theme = store.get('prefs.theme') || constants.DEFAULT_SETTING_THEME;
-        themeInjector = new ThemeInjector(app, win);
-        themeInjector.inject(theme);
+        const hideDialerSidebar = store.get('prefs.hideDialerSidebar') || constants.DEFAULT_HIDE_DIALER_SIDEBAR;
+        cssInjector = new CSSInjector(app, win);
+        cssInjector.injectTheme(theme);
+        cssInjector.showHideDialerSidebar(hideDialerSidebar);
     });
 
     // Create our system notification area icon.
@@ -481,7 +483,7 @@ ipcMain.on('pref-change-theme', (event, theme) => {
     console.log(`Theme changed to: ${theme}`);
 
     // Apply the selected them and then save the selection to the user's settings store.
-    themeInjector.inject(theme);
+    cssInjector.injectTheme(theme);
     const prefs = store.get('prefs') || {};
     prefs.theme = theme;
     store.set('prefs', prefs);
@@ -539,5 +541,17 @@ ipcMain.on('pref-change-exit-on-close', (e, exitOnClose) => {
     // Apply the new value and then save it to the user's settings store.
     const prefs = store.get('prefs') || {};
     prefs.exitOnClose = exitOnClose;
+    store.set('prefs', prefs);
+});
+
+// Called when the "hide dialer sidebar" checkbox has been checked/unchecked.
+ipcMain.on('pref-change-hide-dialer-sidebar', (e, hideDialerSidebar) => {
+    console.log(`Hide dialer sidebar changed to: ${hideDialerSidebar}`);
+    
+    // Apply the new value and then save it to the user's settings store.
+    const prefs = store.get('prefs') || {};
+    prefs.hideDialerSidebar = hideDialerSidebar;
+
+    cssInjector.showHideDialerSidebar(hideDialerSidebar);
     store.set('prefs', prefs);
 });

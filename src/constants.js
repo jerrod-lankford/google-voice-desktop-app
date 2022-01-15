@@ -26,6 +26,7 @@ const DEFAULT_SETTING_SHOW_MENU_BAR   = true;
 const DEFAULT_SETTING_THEME           = 'default';
 const DEFAULT_SETTING_START_MINIMIZED = false;
 const DEFAULT_SETTING_EXIT_ON_CLOSE   = false;
+const DEFAULT_HIDE_DIALER_SIDEBAR     = false;
 
 module.exports = {
     // Strings
@@ -51,5 +52,6 @@ module.exports = {
     DEFAULT_SETTING_SHOW_MENU_BAR,   // Whether the MenuBar of the main application window should be visible
     DEFAULT_SETTING_THEME,           // Default theme to apply
     DEFAULT_SETTING_START_MINIMIZED, // Whether the application should start minimized to the system notification area
-    DEFAULT_SETTING_EXIT_ON_CLOSE    // Whether the application should terminate when the user closes the main application window
+    DEFAULT_SETTING_EXIT_ON_CLOSE,   // Whether the application should terminate when the user closes the main application window
+    DEFAULT_HIDE_DIALER_SIDEBAR      // Whether the dialer sidebar should be hidden or not
 };

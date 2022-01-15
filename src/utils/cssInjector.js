@@ -4,6 +4,7 @@ const path = require('path');
 
 const BASE = `base.scss`;
 const MAPPINGS = `mappings.scss`;
+const HIDE_DIALER_SIDEBAR_CSS = `gv-call-sidebar { display: none }`;
 
 module.exports = class Injector {
     constructor(app, win) {
@@ -11,7 +12,21 @@ module.exports = class Injector {
         this.app = app;
     }
 
-    inject(theme) {
+    showHideDialerSidebar(hide) {
+        if (!this.win) return;
+
+        if (hide) {
+            this.win.webContents.insertCSS(HIDE_DIALER_SIDEBAR_CSS).then(key => {
+                this.sidebarStyleKey = key;
+            });
+        } else {
+            if (this.sidebarStyleKey) {
+                this.win.webContents.removeInsertedCSS(this.sidebarStyleKey);
+            }
+        }
+    }
+
+    injectTheme(theme) {
         if (this.styleKey) {
             this.win.webContents.removeInsertedCSS(this.styleKey);
             this.styleKey = null;
@@ -24,6 +39,7 @@ module.exports = class Injector {
                 const result = sass.renderSync({data});
                 const styles = result.css.toString().replace(/;/g, ' !important;');
                 if (this.win) {
+                    console.log(styles);
                     this.win.webContents.insertCSS(styles).then(key => {
                         this.styleKey = key;
                     });
