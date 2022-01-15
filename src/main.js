@@ -135,7 +135,7 @@ function createWindow() {
                 {type:  'separator'},
                 {label: '&Hide menu bar', visible: !isMac(), click: () => {win.setMenuBarVisibility(false);}} // Hide the menu bar (not supported for Mac)
             ]
-        }
+        },
         {
             label: '&Help',
             submenu: [
