@@ -111,6 +111,18 @@ function createWindow() {
             ]
         },
         {
+            label: "Edit",
+            submenu: [
+                { label: "Undo", accelerator: "CmdOrCtrl+Z", selector: "undo:" },
+                { label: "Redo", accelerator: "Shift+CmdOrCtrl+Z", selector: "redo:" },
+                { type: "separator" },
+                { label: "Cut", accelerator: "CmdOrCtrl+X", selector: "cut:" },
+                { label: "Copy", accelerator: "CmdOrCtrl+C", selector: "copy:" },
+                { label: "Paste", accelerator: "CmdOrCtrl+V", selector: "paste:" },
+                { label: "Select All", accelerator: "CmdOrCtrl+A", selector: "selectAll:" }
+            ]
+        },
+        {
             label: '&View',
             submenu: [
                 {role:  'zoomIn', visible: false},                                           // Zoom in (Ctrl+Shift++)
@@ -123,7 +135,7 @@ function createWindow() {
                 {type:  'separator'},
                 {label: '&Hide menu bar', visible: !isMac(), click: () => {win.setMenuBarVisibility(false);}} // Hide the menu bar (not supported for Mac)
             ]
-        },
+        }
         {
             label: '&Help',
             submenu: [

@@ -95,7 +95,7 @@ gv-thread > div, // Item in the phone call list
 gv-make-call-panel-ng2 > div > div:nth-child(2), // Call panel enter a name or number
 gv-contact-item > div,
 gv-contact-card,
-gv-frequent-contact-card {
+gv-frequent-contact-card > div {
     @extend %list-item;
 }
 
@@ -111,7 +111,8 @@ gv-recipient-picker md-content md-input-container label, // recipient picker pla
 gv-call-as-banner .call-as-label, // Call as banner label
 gv-call-as-banner .phone-number-details, // Call as banner phone number
 gv-make-call-panel-ng2 > div > div,
-gv-frequent-contact-card > button > div > div:first-child span, // frequent contact name
+gv-frequent-contact-card div > div > div:first-child, // Search result heading
+gv-frequent-contact-card div > div:first-child span, // frequent contact name
 gv-contact-item  div gv-annotation, // All contacts heading on right
 gv-contact-card .gmat-body-2 div:first-child div:nth-child(2), // Contact card name after clicking on someones name in the search bar
 gv-recent-search-item gv-annotation,
@@ -121,9 +122,11 @@ gv-call-log-item .primaryText {
 
 gv-thread-item-detail :first-child,
 gv-call-log-item .secondaryText,
-gv-frequent-contact-card > button > div > div:nth-child(2) span, // frequent contact phone number
+gv-frequent-contact-card div > div:nth-child(2) span, // frequent contact phone number
 gv-contact-card .gmat-body-2 > div > div:nth-child(3), // Contact card phone number after clicking on someones name in the search bar
-gv-contact-item > button > div > div:nth-child(2) { // Phone number under all contacts on right
+gv-contact-item > button > div > div:nth-child(2),// Phone number under all contacts on right
+gv-contact-item > div > div > div:nth-child(2) // Phone number under search
+{
     @extend %list-item-detail;
 }
 
