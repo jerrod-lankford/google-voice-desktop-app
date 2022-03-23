@@ -43,7 +43,7 @@
   "sass": "^1.32.8"
  },
  "devDependencies": {
-  "electron": "^14.0.0",
+  "electron": "^14.2.4",
   "electron-builder": "^22.10.5"
  }
 }
