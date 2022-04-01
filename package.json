@@ -7,7 +7,10 @@
   "appId": "com.jerrkawz.voiceDesktop",
   "productName": "Voice Desktop",
   "mac": {
-   "category": "public.app-category.social-networking"
+   "category": "public.app-category.social-networking",
+   "extendInfo": {
+    "NSMicrophoneUsageDescription": "This app requires microphone access to record audio."
+   }
   },
   "dmg": {
    "icon": false
