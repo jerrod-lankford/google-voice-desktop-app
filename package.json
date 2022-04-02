@@ -9,7 +9,7 @@
   "mac": {
    "category": "public.app-category.social-networking",
    "extendInfo": {
-    "NSMicrophoneUsageDescription": "This app requires microphone access to record audio."
+    "NSMicrophoneUsageDescription": "This app requires microphone access to capture your voice while on calls."
    }
   },
   "dmg": {
