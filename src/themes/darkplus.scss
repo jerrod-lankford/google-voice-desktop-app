@@ -32,6 +32,11 @@ gv-thread-item-detail :first-child {
     color: #999999;
 }
 
+.gvHighContrast.gvPageRoot   [_nghost-oqk-c303]   .thread-info.read[_ngcontent-oqk-c303]   .latest-item-details[_ngcontent-oqk-c303] {
+    opacity: 1;
+    color: #999999;
+}
+
 %conversation {
     background-color: transparent;
     border-color: #505050;
