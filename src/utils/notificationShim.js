@@ -22,7 +22,6 @@ module.exports.notificationShim = function(appPath) {
                 
         // Automatically add a click handler, which notifies the main process when a click occurs.
         oldNotification.addEventListener('click', () => {
-            console.log('clicked');
             ipcRenderer.send('notification-clicked', {});
         });
 

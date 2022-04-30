@@ -39,7 +39,6 @@ module.exports = class Injector {
                 const result = sass.renderSync({data});
                 const styles = result.css.toString().replace(/;/g, ' !important;');
                 if (this.win) {
-                    console.log(styles);
                     this.win.webContents.insertCSS(styles).then(key => {
                         this.styleKey = key;
                     });
