@@ -1,5 +1,5 @@
 // Requires
-const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView, shell, powerMonitor, systemPreferences } = require('electron');
+const { app, nativeImage, BrowserWindow, Tray, Menu, ipcMain, BrowserView, shell, powerMonitor, systemPreferences, globalShortcut } = require('electron');
 const constants = require('./constants');
 const AutoLaunch = require('auto-launch')
 const contextMenu = require('electron-context-menu');
@@ -243,6 +243,19 @@ function createWindow() {
     // it (unless the user has enabled the "start minimized" setting).
     if (!prefs.startMinimized) {
         win.show();
+    }
+
+    // Set up some keyboard shortcuts for mac
+    if(isMac()) {
+      // Quit
+      globalShortcut.register('Command+Q', () => {
+        exitApplication();
+      });
+      
+      // Close window
+      globalShortcut.register('Command+W', () => {
+        win.close();
+      });
     }
 
     return win;
