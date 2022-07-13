@@ -26,7 +26,9 @@
   "start": "electron .",
   "postinstall": "electron-builder install-app-deps",
   "build:windows": "electron-builder --windows",
-  "build:mac": "electron-builder --mac",
+  "build:mac": "electron-builder --mac --universal",
+  "build:mac-x64": "electron-builder --mac --x64",
+  "build:mac-arm64": "electron-builder --mac --arm64",
   "build:linux": "electron-builder --linux",
   "release": "electron-builder --mac --windows --linux --publish always"
  },
@@ -47,6 +49,6 @@
  },
  "devDependencies": {
   "electron": "^14.2.4",
-  "electron-builder": "^22.10.5"
+  "electron-builder": "^23.0.2"
  }
 }
