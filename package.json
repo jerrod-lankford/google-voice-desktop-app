@@ -25,12 +25,10 @@
  "scripts": {
   "start": "electron .",
   "postinstall": "electron-builder install-app-deps",
-  "build:windows": "electron-builder --windows",
-  "build:mac": "electron-builder --mac --universal",
-  "build:mac-x64": "electron-builder --mac --x64",
-  "build:mac-arm64": "electron-builder --mac --arm64",
-  "build:linux": "electron-builder --linux",
-  "release": "electron-builder --mac --windows --linux --publish always"
+  "build:windows": "electron-builder --windows --x64 --arm64",
+  "build:mac": "electron-builder --mac --x64 --arm64",
+  "build:linux": "electron-builder --linux --x64 --arm64",
+  "release": "electron-builder --mac --windows --linux --x64 --arm64 --publish always"
  },
  "keywords": [
   "electron",

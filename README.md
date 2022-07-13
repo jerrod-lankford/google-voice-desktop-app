@@ -51,10 +51,6 @@ Not only themes but also a system for themeing! If you want to create your own t
 To build yourself you can run
 `yarn run build:windows` or `yarn run build:mac` or `yarn run build:linux`
 
-Note about mac builds: `yarn run build:mac` will build a universal installer, which includes builds for both Intel (x64) and M1 (arm64) macs.
-The installer will be about twice the size of a single-architecture build.
-If you want to build for a specific architecture, you can use `yarn run build:mac-x64` or `yarn run build:mac-arm64`.
-
 ## Screenshots
 
 **Main window:**
