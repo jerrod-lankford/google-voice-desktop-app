@@ -235,11 +235,11 @@ div[ng-class="ctrl.dialpadVisible ? '' : ctrl.CSS.DIALPAD_COLLAPSED"] {
 /* Fixes for light-colored dial pad */
 
 .dialpad-container {
-  background: $background;
+  background-color: $background;
 }
 
 .input-row {
-  background: $background;
+  background-color: $background;
   color: $foreground;
 }
 
@@ -254,4 +254,26 @@ div[ng-class="ctrl.dialpadVisible ? '' : ctrl.CSS.DIALPAD_COLLAPSED"] {
 
 .call-button.mat-button-disabled {
   background-color: $secondary;
+}
+
+.active-call {
+  background-color: $background;
+}
+
+.active-call-wrapper {
+  background-color: $background;
+}
+
+.remote-display-name {
+  color: $foreground;
+}
+
+.gmat-button {
+  background-color: $button;
+  color: $active;
+}
+
+.dtmf-input {
+  background-color: $selection;
+  color: $foreground;
 }
