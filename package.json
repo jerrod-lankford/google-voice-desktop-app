@@ -28,8 +28,8 @@
   "build:windows": "electron-builder --windows",
   "build:mac": "electron-builder --mac",
   "build:linux": "electron-builder --linux",
-  "build:x64": "electron-builder --mac --linux --windows --x64",
-  "build:arm64": "electron-builder --mac --linux --windows --arm64",
+  "build:x64": "electron-builder --mac --windows --linux --x64",
+  "build:arm64": "electron-builder --mac --windows --linux --arm64",
   "release": "electron-builder --mac --windows --linux --x64 --arm64 --publish always"
  },
  "keywords": [
