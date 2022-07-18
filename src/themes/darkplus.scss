@@ -277,3 +277,10 @@ div[ng-class="ctrl.dialpadVisible ? '' : ctrl.CSS.DIALPAD_COLLAPSED"] {
   background-color: $selection;
   color: $foreground;
 }
+
+/* Make unread texts a bit more obvious */
+
+.gmat-subtitle-2.gvThreadItem-unread {
+  font-weight: bold;
+  background-color: $secondary;
+}
