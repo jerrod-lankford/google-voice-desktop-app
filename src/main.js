@@ -113,7 +113,16 @@ function createWindow() {
                 {type:  'separator'},
                 {label: '&Settings',      click: () => {showSettingsWindow()}},   // Open/display our Settings window
                 {type:  'separator'},
-                {label: '&Exit',          click: () => {exitApplication();}}      // Exit the application
+                {
+                  label: '&Close',                                                // Close the window
+                  accelerator: isMac() ? 'Command+W' : 'Ctrl+W',
+                  click: () => {win.close();}
+                },
+                {
+                  label: '&Exit',                                                 // Exit the application
+                  accelerator: isMac() ? 'Command+Q' : 'Ctrl+Shift+W',
+                  click: () => {exitApplication();}
+                }
             ]
         },
         {
