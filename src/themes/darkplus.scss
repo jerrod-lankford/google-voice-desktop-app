@@ -5,6 +5,8 @@ $primary: #006156;
 $secondary: #003126;
 $selection: #222425;
 $border: #252525;
+$active: #30a99b;
+$button: #212425;
 
 @use 'base';
 
@@ -24,7 +26,7 @@ mat-divider {
 }
 
 %side-nav-item-active svg {
-    color: #30A99b;
+    color: $active
 }
 
 gv-thread-item-detail :first-child {
@@ -228,4 +230,57 @@ div#mat-select-value-1 {
 
 div[ng-class="ctrl.dialpadVisible ? '' : ctrl.CSS.DIALPAD_COLLAPSED"] {
     background-color: #131516;
+}
+
+/* Fixes for light-colored dial pad */
+
+.dialpad-container {
+  background-color: $background;
+}
+
+.input-row {
+  background-color: $background;
+  color: $foreground;
+}
+
+.mat-ripple.button {
+  background-color: $button;
+  color: $foreground;
+}
+
+.call-button {
+  background-color: $active;
+}
+
+.call-button.mat-button-disabled {
+  background-color: $secondary;
+}
+
+.active-call {
+  background-color: $background;
+}
+
+.active-call-wrapper {
+  background-color: $background;
+}
+
+.remote-display-name {
+  color: $foreground;
+}
+
+.gmat-button {
+  background-color: $button;
+  color: $active;
+}
+
+.dtmf-input {
+  background-color: $selection;
+  color: $foreground;
+}
+
+/* Make unread texts a bit more obvious */
+
+.gmat-subtitle-2.gvThreadItem-unread {
+  font-weight: bold;
+  background-color: $secondary;
 }
