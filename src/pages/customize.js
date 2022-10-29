@@ -11,6 +11,7 @@
     
     // Retrieve the user's settings store from the main process.
     const prefs = await ipcRenderer.invoke('get-user-prefs');
+    let sms_alert = (prefs.sms_alert || constants.DEFAULT_SETTING_SMS_ALERT);
 
     // Populate the "theme" dropdown with the user's currently selected theme.
     // Notify the main process whenever the user selects a different theme.
@@ -19,6 +20,22 @@
     themePicker.addEventListener('change', (e) => {
         const theme = e.target.value;
         ipcRenderer.send('pref-change-theme', theme);
+    });
+
+    // Populate the "sms-alert" dropdown with the user's currently selected sound.
+    // Notify the main process whenever the user selects a different sound.
+    const alertPicker = document.getElementById('sms-alert');
+    alertPicker.value = (prefs.sms_alert || constants.DEFAULT_SETTING_SMS_ALERT);
+    alertPicker.addEventListener('change', (e) => {
+        sms_alert = e.target.value;
+        ipcRenderer.send('pref-change-alert', sms_alert);
+    });
+
+    // Whenever the user clicks the "test" button, inform the main
+    // window to relay the request to our audio window
+    const alertTestButton = document.getElementById('test-alert');
+    alertTestButton.addEventListener('click', (e) => {
+        ipcRenderer.send('test-alert', sms_alert);
     });
     
     // Set the "zoom" slider to the main window's current zoom level.
