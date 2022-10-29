@@ -11,6 +11,11 @@ const APPLICATION_ICON_MEDIUM               = '64px-Google_Voice_icon_(2020).png
 const APPLICATION_ICON_SMALL                = 'tray-Google_Voice_icon_(2020).png';
 const APPLICATION_ICON_SMALL_WITH_INDICATOR = 'tray-dirty-Google_Voice_icon_(2020).png';
 
+// Sounds
+const SOUND_DINGDING             = 'ding-ding-sound-effect.mp3';
+const SOUND_PAGER                = 'emergency-pager-sound.mp3';
+const SOUND_NOTIFY               = 'tinder-notification-sound.mp3';
+
 // URLs
 const URL_GOOGLE_VOICE           = 'https://voice.google.com'
 const URL_GITHUB_README          = 'https://github.com/jerrod-lankford/google-voice-desktop-app/blob/master/README.md'
@@ -23,6 +28,7 @@ const URL_GITHUB_RELEASES        = 'https://github.com/jerrod-lankford/google-vo
 
 // Default Settings
 const DEFAULT_SETTING_SHOW_MENU_BAR   = true;
+const DEFAULT_SETTING_SMS_ALERT       = 'silent';
 const DEFAULT_SETTING_THEME           = 'default';
 const DEFAULT_SETTING_START_MINIMIZED = false;
 const DEFAULT_SETTING_EXIT_ON_CLOSE   = false;
@@ -37,7 +43,12 @@ module.exports = {
     APPLICATION_ICON_MEDIUM,               // Main application icon (medium) --sufficient size for Windows Taskbar
     APPLICATION_ICON_SMALL,                // Main application icon (small)  --sufficient size for system notification area
     APPLICATION_ICON_SMALL_WITH_INDICATOR, // Main application icon (small, with "notifications" indicator)
- 
+
+    // Sounds
+    SOUND_DINGDING,             // ding-ding-sound-effect.mp3
+    SOUND_PAGER,                // emergency-pager-sound.mp3
+    SOUND_NOTIFY,               // tinder-notification-sound.mp3
+
     // URLs
     URL_GOOGLE_VOICE,           // Google Voice homepage
     URL_GITHUB_README,          // The "README.md" file on GitHub
@@ -51,6 +62,7 @@ module.exports = {
     // Default Settings
     DEFAULT_SETTING_SHOW_MENU_BAR,   // Whether the MenuBar of the main application window should be visible
     DEFAULT_SETTING_THEME,           // Default theme to apply
+    DEFAULT_SETTING_SMS_ALERT,       // Default sound to use for SMS Alerts
     DEFAULT_SETTING_START_MINIMIZED, // Whether the application should start minimized to the system notification area
     DEFAULT_SETTING_EXIT_ON_CLOSE,   // Whether the application should terminate when the user closes the main application window
     DEFAULT_HIDE_DIALER_SIDEBAR      // Whether the dialer sidebar should be hidden or not

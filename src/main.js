@@ -19,6 +19,9 @@ const iconTrayDirty = path.join(appPath, 'images', constants.APPLICATION_ICON_SM
 const dockIcon = nativeImage.createFromPath(path.join(appPath, 'images', constants.APPLICATION_ICON_LARGE));
 const DEFAULT_WIDTH = 1200;
 const DEFAULT_HEIGHT = 900;
+const soundDingDing = path.join(appPath, 'sounds', constants.SOUND_DINGDING);
+const soundPager = path.join(appPath, 'sounds', constants.SOUND_PAGER);
+const soundNotify = path.join(appPath, 'sounds', constants.SOUND_NOTIFY);
 
 // Globals
 let lastNotification = 0;
@@ -27,6 +30,7 @@ let cssInjector;
 let tray;
 let win;            // The main application window
 let settingsWindow; // When not null, the "Settings" window, which is currently open
+let audioWindow;    // offscreen window to play audio
 
 // Only one instance of the app should run
 if (!app.requestSingleInstanceLock()) {
@@ -82,7 +86,7 @@ app.on('activate', () => {
 setInterval(updateNotifications.bind(this, app), REFRESH_RATE);
 
 app.dock && app.dock.setIcon(dockIcon);
-app.whenReady().then(createWindow);
+app.whenReady().then(createWindow).then(createAudioWindow);
 
 // Creates and returns this application's main BrowserWindow, navigated to Google Voice.
 function createWindow() {
@@ -340,6 +344,10 @@ function processNotificationCount(app, count) {
         else {
             tray && tray.setImage(iconTray);
         }
+
+        if (count > oldCount) {
+            playSelectedSound();
+        }
     }
 }
 
@@ -382,7 +390,7 @@ function processNotificationCount_MacOS(app, oldCount, newCount) {
 function createTray(iconPath, tipText) {
     // Create the icon, assigning it our application icon and name.
     let appIcon = new Tray(iconPath);
-	appIcon.setToolTip(tipText);
+    appIcon.setToolTip(tipText);
 
     // Construct the icon's context menu.  This is done using an array of MenuItem objects.
     appIcon.setContextMenu(Menu.buildFromTemplate([
@@ -452,6 +460,57 @@ function saveWindowSize() {
     store.set('prefs', prefs);
 }
 
+function createAudioWindow() {
+    if (!audioWindow) {
+        // Create our (never shown) audio window, keeping a global reference to it.
+        audioWindow = new BrowserWindow({
+            width: 100,
+            height: 100,
+            title: 'Audio',
+            parent: win,
+            modal: false,
+            show: false,
+            resizable: false,
+            minimizable: false,
+            webPreferences: {
+                nodeIntegration: true,
+                contextIsolation: true,
+                preload: path.join(appPath, 'src', 'pages', 'audio-preload.js')
+            }});
+        audioWindow.removeMenu();
+        audioWindow.hide();
+
+        // Load our audio page into the window.
+        audioWindow.loadFile(path.join(appPath, 'src', 'pages', 'audio.html'));
+
+        // When the window gets closed, release its global reference.
+        audioWindow.on('close', function() {
+            audioWindow = null;
+        });
+    }
+}
+
+function getSoundPath(sndName) {
+    if      ('dingding' === sndName) { return soundDingDing; }
+    else if ('pager'    === sndName) { return soundPager;    }
+    else if ('notify'   === sndName) { return soundNotify;   }
+    else                             { return null;          }
+}
+
+function playSound(sndPath) {
+    console.log(`playing sound: ${sndPath}`);
+    audioWindow.webContents.send('play-sound', sndPath);
+}
+
+function playSelectedSound() {
+    const prefs = store.get('prefs') || {};
+    const sms_alert = (prefs.sms_alert || constants.DEFAULT_SETTING_SMS_ALERT);
+    const sndPath = getSoundPath(sms_alert);
+    if (sndPath) {
+        playSound(sndPath);
+    }
+}
+
 // ====================================================================================================================
 // Helper Functions
 // ====================================================================================================================
@@ -502,6 +561,29 @@ ipcMain.on('pref-change-theme', (event, theme) => {
     const prefs = store.get('prefs') || {};
     prefs.theme = theme;
     store.set('prefs', prefs);
+});
+
+// Called when the SMS Alert sound has been changed
+ipcMain.on('pref-change-alert', (event, sms_alert) => {
+    console.log(`SMS Alert changed to: ${sms_alert}`);
+
+    // Apply the new value and then save it to the user's settings store.
+    const prefs = store.get('prefs') || {};
+    prefs.sms_alert = sms_alert;
+    store.set('prefs', prefs);
+});
+
+// Called when the SMS Alert 'test' button has been clicked
+ipcMain.on('test-alert', (event, sms_alert) => {
+    console.log(`Testing ${sms_alert}`);
+
+    // Relay the request to the audio window
+    const sndPath = getSoundPath(sms_alert);
+    if (sndPath) {
+        console.log(`...from file ${sndPath}`);
+        playSound(sndPath);
+    }
+    console.log(`done testing selected sound`);
 });
 
 // Called when the zoom level has been changed.
@@ -569,4 +651,13 @@ ipcMain.on('pref-change-hide-dialer-sidebar', (e, hideDialerSidebar) => {
 
     cssInjector.showHideDialerSidebar(hideDialerSidebar);
     store.set('prefs', prefs);
+});
+
+// ====================================================================================================================
+// Audio Window Event Handlers
+// ====================================================================================================================
+
+// Called when the audio window is finished playing a sound
+ipcMain.on('sound-complete', (e, value) => {
+    console.log(`Finished playing sound: ${value}`);
 });
