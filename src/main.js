@@ -283,7 +283,7 @@ function updateNotifications(app) {
     let sum = 0;
 
     // Query the dom for the notification badges
-    win.webContents.executeJavaScript(`Array.from(document.querySelectorAll('.gv_root .navListItem .navItemBadge')).map(n => n.textContent && n.textContent.trim());`).then(counts => {
+    win.webContents.executeJavaScript(`Array.from(document.querySelectorAll('.mat-sidenav-content .navListItem:not(mat-divider~.navListItem) .navItemBadge')).map(n => n.textContent && n.textContent.trim());`).then(counts => {
         if (counts && counts.length > 0) {
             sum = counts.reduce((accum, count) => {
                 try {
@@ -329,6 +329,7 @@ function processNotificationCount(app, count) {
             processNotificationCount_MacOS(app, oldCount, count);
         }
         else if (isWindows()) {
+
             processNotificationCount_Windows(oldCount, count);
         }
         
