@@ -329,7 +329,6 @@ function processNotificationCount(app, count) {
             processNotificationCount_MacOS(app, oldCount, count);
         }
         else if (isWindows()) {
-
             processNotificationCount_Windows(oldCount, count);
         }
         
