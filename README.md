@@ -14,7 +14,7 @@ Questions? Ideas? Join us in discord https://discord.gg/3SSS6vkKET
 ## Installation
 [Releases Page](https://github.com/latin-programmer/google-voice-desktop-app/releases)
 
-For Mac and Linxu support, you can use an older version of the app (the original) at: [Releases Page](https://github.com/Jerrkawz/google-voice-desktop-app/releases) and download the release for your OS. In the original version, simply uzip and drag into the applications folder (mac) or run the executable (windows) or run the app image (ubuntu)
+For Mac and Linux support, you can use an older version of the app (the original) at: [Releases Page](https://github.com/Jerrkawz/google-voice-desktop-app/releases) and download the release for your OS. In the original version, simply uzip and drag into the applications folder (mac) or run the executable (windows) or run the app image (ubuntu)
 
 **Mac Note: The mac version is unsigned, so you will have to click "Open Anyway" after running, or go to Settings > Security & Privacy > General > Open Anyway. The original author did not want to pay for a dev license just for this**
 
@@ -41,7 +41,7 @@ The latest version now supports custom themes, which can be set in the Settings 
 Not only themes but also a system for themeing! If you want to create your own theme and contribute back to the project you can do that [here](THEMES.md).
 
 ## Run From Source
-`git clone git@github.com:Jerrkawz/google-voice-desktop-app.git`
+`git clone git@github.com:latin-programmer/google-voice-desktop-app.git`
 
 `npm install -g yarn`
 
@@ -51,6 +51,8 @@ Not only themes but also a system for themeing! If you want to create your own t
 
 To build yourself you can run
 `yarn run build:windows` or `yarn run build:mac` or `yarn run build:linux`
+
+Note: for the current maintainer is only able to do windows builds. If you would like, you can review what is needed for the mac and linux versions and help out with those (basically, for mac you need a Mac, and for Linux you need a Linux VM).
 
 ## Screenshots
 
