@@ -371,7 +371,7 @@ function processNotificationCount_MacOS(app, oldCount, newCount) {
     // Overlay the specified new count on our Dock icon.  If the count has
     // increased, also bouce the icon the catch the user's attention.
     if (app.dock) {
-        app.dock.setBadge(`${newCount || ''}`);
+        app.dock.setBadge(`${newCount/2 || ''}`);
         if (newCount > oldCount) {
             app.dock.bounce();
         }
